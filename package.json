@@ -1,0 +1,20 @@
+{
+    "name": "react-native-augment",
+    "version": "1.2.0",
+    "description": "Augment Plugin for the Augment Mobile SDK",
+    "homepage": "https://developers.augment.com",
+    "author": "Augment <dev@augment.com> (https://developers.augment.com)",
+    "license": "MIT",
+    "keywords": [
+        "augment",
+        "ar",
+        "augmented reality",
+        "augment sdk",
+        "augment.com",
+        "react-native",
+        "react",
+        "android",
+        "ios"
+    ],
+    "nativePackage": true
+}
