@@ -62,6 +62,7 @@ Please be as descriptive as possible when creating an issue. Give us the informa
  - Describe the exact steps which reproduce the problem in as many details as possible.
  - Provide specific examples to demonstrate the steps. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use Markdown code blocks.
  - Describe the behavior you observed after following the steps and point out what exactly is the problem with that behavior.
+ - If the problem started happening recently, can you reproduce the problem in an older version. What's the most recent version in which the problem doesn't happen?
  - Explain which behavior you expected to see instead and why.
 - **OS**: (required) what operating system are you on?
 - **version**: (required) please note the version of the module are you using
