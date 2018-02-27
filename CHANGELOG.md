@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2018-02-27
+### Fixed
+- augmentSDK header imports
+
 ## [1.2.0] - 2018-02-12
 ### Changed
 - Use PropTypes
