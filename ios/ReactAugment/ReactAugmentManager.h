@@ -8,7 +8,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
-#import "AugmentPlayerSDK.h"
+#import <AugmentPlayerSDK/AugmentPlayerSDK.h>
 #import "AugmentReactPlayerView.h"
 
 // Events names
@@ -36,7 +36,7 @@ static NSString* ARG_MODEL_NUMBER = @"model_number";
 
 @property (nonatomic, strong) AGTAugmentSDK* augmentSDK;
 @property (nonatomic, weak) AGTView* augmentView;
-    
+
 @property (nonatomic, copy) RCTPromiseRejectBlock  startErrorPromise;
 @property (nonatomic, copy) RCTPromiseResolveBlock startSuccessPromise;
 @property (nonatomic, copy) RCTPromiseRejectBlock  productErrorPromise;
