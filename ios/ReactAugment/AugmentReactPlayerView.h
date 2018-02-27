@@ -5,7 +5,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AugmentPlayerSDK.h"
+#import <AugmentPlayerSDK/AugmentPlayerSDK.h>
 
 @class AugmentReactPlayerView;
 
