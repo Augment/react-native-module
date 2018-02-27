@@ -82,12 +82,12 @@ export default class AugmentReactExample extends Component {
     render() {
         let displayMode = this.state.loaderShow ? "flex" : "none";
         return (
-            <View style={styles.container}>
+            <View style={styles.container} pointerEvents={'none','box-none'}>
                 <AugmentReactPlayer style={styles.augmentPlayer}
                     onPlayerReady={this.business.bind(this)}
                     loaderCallback={this.loader.bind(this)}
                 />
-                <View style={styles.loaderContainer}>
+                <View style={styles.loaderContainer} pointerEvents={'none','box-none'}>
                     <Text style={[styles.loader, {display: displayMode}]}>
                         {this.state.loaderText}
                     </Text>
