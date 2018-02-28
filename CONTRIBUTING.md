@@ -13,7 +13,7 @@ By contributing to this project, you:
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Atom Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [support@augment.com](mailto:support@augment.com).
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [support@augment.com](mailto:support@augment.com).
 
 ## Getting started
 
@@ -25,7 +25,7 @@ Creating an issue is the simplest form of contributing to a project. But there a
 - Feature requests
 - Bug reports
 - Pull Requests
-- Help evaluate [open pull requests](https://github.com/jekyll/jekyll/pulls), by testing the changes locally and reviewing what's proposed.
+- Help evaluate [open pull requests](https://github.com/Augment/react-native-module/pulls), by testing the changes locally and reviewing what's proposed.
 
 ## Issues
 
