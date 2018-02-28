@@ -5,6 +5,10 @@
     "homepage": "https://developers.augment.com",
     "author": "Augment <dev@augment.com> (https://developers.augment.com)",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Augment/react-native-module.git"
+    },
     "keywords": [
         "augment",
         "ar",
