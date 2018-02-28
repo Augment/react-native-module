@@ -232,7 +232,7 @@
 		02A5784A1EB38DC2001562F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../ios/AugmentPlayerSDK.framework\"/**";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/Pods/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -242,7 +242,7 @@
 		02A5784B1EB38DC2001562F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../ios/AugmentPlayerSDK.framework\"/**";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/Pods/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

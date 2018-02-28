@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.1] - 2018-03-01
+### Changed
+- Default path for Framework (Header) Search's
+
 ## [1.3.0] - 2018-02-27
 ### Fixed
 - augmentSDK header imports
