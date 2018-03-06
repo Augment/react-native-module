@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.2] - 2018-03-06
+### Fixed
+- Avoid exception for Product being null
+
 ## [1.3.1] - 2018-03-01
 ### Changed
 - Default path for Framework (Header) Search's
