@@ -49,8 +49,10 @@ RCT_EXPORT_METHOD(checkIfModelDoesExistForUserProduct:(NSDictionary *)product re
         [self useRejecter:rejecter withErrorMessage:error.localizedDescription];
         return;
     }
-    
-      resolver(@[[self getDictionaryForProduct: augmentProduct]]);
+        
+    if (augmentProduct != nil){
+        resolver(@[[self getDictionaryForProduct: augmentProduct]]);
+    }
   }];
 }
 
