@@ -340,7 +340,7 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
         if (augmentPlayerSDK != null) {
             try {
                 augmentPlayerSDK.getAugmentPlayer().resume();
-            } catch (AugmentPlayerException e) {
+            } catch (Exception e) {
                 Log.e(LOGTAG, "EXCEPTION: " + e.getLocalizedMessage(), e);
             }
         }
@@ -351,7 +351,7 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
         if (augmentPlayerSDK != null) {
             try {
                 augmentPlayerSDK.getAugmentPlayer().pause();
-            } catch (AugmentPlayerException e) {
+            } catch (Exception e) {
                 Log.e(LOGTAG, "EXCEPTION: " + e.getLocalizedMessage(), e);
             }
         }
@@ -362,7 +362,7 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
         if (augmentPlayerSDK != null) {
             try {
                 augmentPlayerSDK.getAugmentPlayer().stop();
-            } catch (AugmentPlayerException e) {
+            } catch (Exception e) {
                 Log.e(LOGTAG, "EXCEPTION: " + e.getLocalizedMessage(), e);
             }
         }

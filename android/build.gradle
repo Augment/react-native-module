@@ -21,5 +21,5 @@ dependencies {
     compile "com.facebook.react:react-native:0.19.+"
     compile "com.google.zxing:core:3.2.1"
     compile "com.drewnoakes:metadata-extractor:2.9.1"
-    compile "com.ar.augment:augment-player-sdk:1.0.2"
+    compile "com.ar.augment:augment-player-sdk:1.0.3"
 }
