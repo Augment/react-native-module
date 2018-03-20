@@ -28,7 +28,7 @@ export default class AugmentReactExample extends Component {
         .then((product) => {
             console.log(product);
         })
-        .cath((error) => {
+        .catch((error) => {
             console.error(error);
         })
 
