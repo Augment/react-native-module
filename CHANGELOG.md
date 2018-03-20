@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.3] - 2018-03-20
+### Changed
+- Augment SDK version to `1.0.3`
+
+### Fixed
+- Catch exceptions on the de-initialisation of Vuforia and lifecycle events.
+
 ## [1.3.2] - 2018-03-06
 ### Fixed
 - Avoid exception for Product being null
