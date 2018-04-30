@@ -21,6 +21,7 @@ var credentials = {
 }
 
 export default class AugmentReactExample extends Component {
+
     constructor(props) {
         super(props);
         AugmentReact.init(credentials);
@@ -29,6 +30,31 @@ export default class AugmentReactExample extends Component {
             loaderText: "Loading ...",
             loaderShow: true
         };
+    }
+
+    render() {
+        let displayMode = this.state.loaderShow ? "flex" : "none";
+        return (
+            <View style={styles.container} pointerEvents={'none','box-none'}>
+                <AugmentReactPlayer style={styles.augmentPlayer}
+                    onPlayerReady={this.business.bind(this)}
+                    loaderCallback={this.loader.bind(this)}
+                />
+                <View style={styles.loaderContainer} pointerEvents={'none','box-none'}>
+                    <Text style={[styles.loader, {display: displayMode}]}>
+                        {this.state.loaderText}
+                    </Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button style={styles.button}
+                        title="Center"
+                        onPress={this.centerProduct.bind(this)} />
+                    <Button style={styles.button}
+                        title="Buy"
+                        onPress={this.buyProduct.bind(this)} />
+                </View>
+            </View>
+        );
     }
 
     loader(loaderStatus) {
@@ -75,31 +101,6 @@ export default class AugmentReactExample extends Component {
 
     buyProduct() {
         alert('This is a demo :)');
-    }
-
-    render() {
-        let displayMode = this.state.loaderShow ? "flex" : "none";
-        return (
-            <View style={styles.container} pointerEvents={'none','box-none'}>
-                <AugmentReactPlayer style={styles.augmentPlayer}
-                    onPlayerReady={this.business.bind(this)}
-                    loaderCallback={this.loader.bind(this)}
-                />
-                <View style={styles.loaderContainer} pointerEvents={'none','box-none'}>
-                    <Text style={[styles.loader, {display: displayMode}]}>
-                        {this.state.loaderText}
-                    </Text>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Button style={styles.button}
-                        title="Center"
-                        onPress={this.centerProduct.bind(this)} />
-                    <Button style={styles.button}
-                        title="Buy"
-                        onPress={this.buyProduct.bind(this)} />
-                </View>
-            </View>
-        );
     }
 }
 
