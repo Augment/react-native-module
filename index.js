@@ -17,6 +17,8 @@ var AugmentReact = NativeModules.AugmentReact;
 // AugmentReact.AUGMENT_EVENT_LOADING_OVER
 
 const AugmentEventEmitter = new NativeEventEmitter(AugmentReact);
+var loadingProgressSubscription
+var loadingOverSubscription
 
 /**
  * This is the Native View (Player) class that will be extended
@@ -40,14 +42,14 @@ var AugmentReactPlayerNative = requireNativeComponent('AugmentReactPlayerNative'
 class AugmentReactPlayer extends Component {
     constructor(props) {
         super(props);
-        AugmentEventEmitter.addListener(
+        loadingProgressSubscription = AugmentEventEmitter.addListener(
             AugmentReact.AUGMENT_EVENT_LOADING_PROGRESS,
             this.handleLoadingProgress.bind(this)
-        );
-        AugmentEventEmitter.addListener(
+        )
+        loadingOverSubscription = AugmentEventEmitter.addListener(
             AugmentReact.AUGMENT_EVENT_LOADING_OVER,
             this.handleLoadingOver.bind(this)
-        );
+        )
     }
 
     handleLoadingProgress(args) {
@@ -93,6 +95,16 @@ class AugmentReactPlayer extends Component {
         .catch((error) => {
             this.props.onPlayerReady(null, error);
         });
+    }
+
+    componentWillUnmount(){
+      console.log('unmounting')
+      AugmentReact.pause()
+      console.log('end pause')
+      loadingProgressSubscription.remove()
+      console.log('first remove')
+      loadingOverSubscription.remove()
+      console.log('second')
     }
 
     render() {

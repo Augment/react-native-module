@@ -22,12 +22,12 @@ RCT_EXPORT_MODULE(AugmentReact);
  * data is a Map object with "id" "key" "vuforia" keys
  */
 RCT_EXPORT_METHOD(init: (NSDictionary*) data) {
-  
+
   // Define a delegate for when a player will be instantiated
   // From that point we will start the AR session
   // @see AugmentReactPlayerView for more information
   [AugmentReactPlayerView SetInstantiationDelegate: self];
-  
+
   [AGTAugmentSDK setSharedClientID: data[ARG_APP_ID]
                 sharedClientSecret: data[ARG_APP_KEY]
                   sharedVuforiaKey: data[ARG_VUFORIA_KEY]
@@ -42,14 +42,14 @@ RCT_EXPORT_METHOD(init: (NSDictionary*) data) {
  * This method returns an augmentProduct through the React callback mechanism
  */
 RCT_EXPORT_METHOD(checkIfModelDoesExistForUserProduct:(NSDictionary *)product resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
-  
+
   [self.augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[ARG_IDENTIFIER] brand: product[ARG_BRAND] name: product[ARG_NAME] EAN: product[ARG_EAN] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
-    
+
     if (error != nil) {
         [self useRejecter:rejecter withErrorMessage:error.localizedDescription];
         return;
     }
-        
+
     if (augmentProduct != nil){
         resolver(@[[self getDictionaryForProduct: augmentProduct]]);
     }
@@ -66,17 +66,23 @@ RCT_EXPORT_METHOD(start:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRej
   self.startSuccessPromise = resolver;
 }
 
+RCT_EXPORT_METHOD(pause) {
+    NSLog(@"calling pause");
+    [self.augmentSDK.augmentPlayer pause];
+    NSLog(@"ending pause!");
+}
+
 /**
  * AugmentReactPlayerViewDelegate
  * This method is called when the Augment View has been added to the view hierarchy
  */
 - (void) instantiationDone: (AugmentReactPlayerView*) augmentView {
   self.augmentView = augmentView;
-  
+
 #if AGT_AR_AVAILABLE
   self.augmentView.augmentPlayer = self.augmentSDK.augmentPlayer;
 #endif
-  
+
   [self startARSession];
 }
 
@@ -91,13 +97,13 @@ RCT_EXPORT_METHOD(addProductToAugmentPlayer:(NSDictionary *)product resolver:(RC
       [self useRejecter:rejecter withErrorMessage:@"addProductToAugmentPlayer must be used after a success call to start()"];
       return;
   }
-  
+
   // Because adding a product to the ARView is a multi step operation
   // We save the callbacks so we can access it latter when the operation
   // has succeeded or failed
   self.productErrorPromise   = rejecter;
   self.productSuccessPromise = resolver;
-  
+
   [self getProduct: product];
 }
 
@@ -110,7 +116,6 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
       [self useRejecter:rejecter withErrorMessage:@"recenterProducts must be used after a success call to start()"];
       return;
   }
-  
     [self.augmentSDK.augmentPlayer recenterProducts];
 }
 
@@ -134,7 +139,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
 }
 
 - (void) startARSession {
-  
+
   /**
    * We need to grant camera permission before starting AugmentPlayerSDK
    * otherwise we will have an error during initialization: "Cannot access the camera"
@@ -184,20 +189,20 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
  * It will get the product from Augment (or from the cache if available)
  */
 - (void) getProduct: (NSDictionary*) product {
-  
+
   [self sendEventLoadingProgress: 0];
 
   // Check if the product is already in cache
   AGTProduct* cachedProduct = [self.augmentSDK.productsDataController productForIdentifier: product[@"identifier"]];
   if (cachedProduct != nil) {
-      
+
     // No product found in Augment Product Database
     if (cachedProduct == AGTProduct.unfoundProduct) {
       [self sendEventLoadingOver];
       [self productError: @"This product is not available yet"];
       return;
     }
-      
+
     // Add the product to the AR view
     [self addToARView: cachedProduct];
   }
@@ -210,14 +215,14 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
 - (void) queryAugmentDatabase: (NSDictionary*) product {
   __weak ReactAugmentManager* weakSelf = self;
   [self.augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[@"identifier"] brand: product[@"brand"] name: product[@"name"] EAN: product[@"ean"] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
-    
+
     // Check if an error occured
     if (error != nil) {
       [weakSelf sendEventLoadingOver];
       [weakSelf productError: error.localizedDescription];
       return;
     }
-    
+
     // Check if the product is found
     if (augmentProduct != nil) {
       [weakSelf addToARView: augmentProduct];
@@ -241,7 +246,7 @@ int lastProgress = 0;
  */
 - (void) addToARView: (AGTProduct*) augmentProduct {
   __weak ReactAugmentManager* weakSelf = self;
-  
+
   [self.augmentSDK addProductToAugmentPlayer: augmentProduct downloadProgress:^(NSProgress* _Nonnull progress) {
     // Progress callback
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -258,17 +263,17 @@ int lastProgress = 0;
         [errorString appendString: obj.localizedDescription];
         [errorString appendString: @" "];
       }];
-      
+
       [weakSelf sendEventLoadingOver];
       [weakSelf productError: errorString];
       return;
     }
-    
+
     // If everything is ok we start rendering the model
     if (itemIdentifier != nil) {
-      
+
       [weakSelf.augmentSDK.augmentPlayer resume];
-      
+
       [weakSelf sendEventLoadingOver];
       [weakSelf productSuccess];
     }
@@ -294,18 +299,18 @@ int lastProgress = 0;
 }
 
 #pragma mark - Helpers
-    
+
 - (void) useRejecter: (RCTPromiseRejectBlock) rejecter withErrorMessage: (NSString*) message {
     NSError *error = [NSError errorWithDomain:@"ReactAugmentManager" code:1 userInfo: @{NSLocalizedDescriptionKey: message}];
     rejecter(@"ReactAugmentManager", message, error);
 }
 
 - (NSArray<NSDictionary*>*) getResultWithSuccess: (NSDictionary*) data {
-  
+
   if (data == nil) {
     data = @{ARG_SUCCESS: @"ok"};
   }
-  
+
   return @[data];
 }
 
@@ -317,7 +322,7 @@ int lastProgress = 0;
     ARG_IDENTIFIER: product.identifier,
     ARG_BRAND:      product.brand,
     ARG_NAME:       product.name,
-    ARG_EAN:        product.ean
+    ARG_EAN:        product.ean ? : @""
   };
 }
 

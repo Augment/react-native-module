@@ -1,6 +1,6 @@
 {
     "name": "react-native-augment",
-    "version": "1.3.3",
+    "version": "1.3.4-beta1",
     "description": "Augment Plugin for the Augment Mobile SDK",
     "homepage": "https://developers.augment.com",
     "author": "Augment <dev@augment.com> (https://developers.augment.com)",
