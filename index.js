@@ -98,13 +98,9 @@ class AugmentReactPlayer extends Component {
     }
 
     componentWillUnmount(){
-      console.log('unmounting')
       AugmentReact.pause()
-      console.log('end pause')
       loadingProgressSubscription.remove()
-      console.log('first remove')
       loadingOverSubscription.remove()
-      console.log('second')
     }
 
     render() {

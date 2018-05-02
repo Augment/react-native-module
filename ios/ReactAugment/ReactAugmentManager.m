@@ -67,9 +67,7 @@ RCT_EXPORT_METHOD(start:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRej
 }
 
 RCT_EXPORT_METHOD(pause) {
-    NSLog(@"calling pause");
     [self.augmentSDK.augmentPlayer pause];
-    NSLog(@"ending pause!");
 }
 
 /**
@@ -165,8 +163,6 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
     [self startError: errorMessage];
   }
 }
-
-// TODO PAUSE !!! [self.augmentSDK.augmentPlayer pause];
 
 - (void) productSuccess {
   if (self.productSuccessPromise != nil) {
