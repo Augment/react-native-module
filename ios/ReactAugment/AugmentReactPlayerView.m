@@ -8,19 +8,14 @@
 
 @implementation AugmentReactPlayerView
 
-+ (void) setInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate {
-  InstantiationDelegate = delegate;
-}
-
 - (void) willMoveToSuperview:(UIView *)newSuperview {
   NSLog(@"will move to super view %@", newSuperview);
 }
 
 - (void) didMoveToSuperview {
-  if (InstantiationDelegate != nil) {
-    [InstantiationDelegate instantiationDone:self];
-    InstantiationDelegate = nil;
-  }
+    if (self.superview != NULL) {
+        [self.augmentReactPlayerViewDelegate onInstantiationDone:self];
+    }
 }
 
 @end

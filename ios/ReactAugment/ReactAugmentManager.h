@@ -32,7 +32,7 @@ static NSString* ARG_ERROR        = @"error";
 static NSString* ARG_SUCCESS      = @"success";
 static NSString* ARG_MODEL_NUMBER = @"model_number";
 
-@interface ReactAugmentManager : RCTEventEmitter <RCTBridgeModule, AugmentReactPlayerViewDelegate>
+@interface ReactAugmentManager : RCTEventEmitter <RCTBridgeModule>
 
 @property (nonatomic, strong) AGTAugmentSDK* augmentSDK;
 @property (nonatomic, weak) AGTView* augmentView;
