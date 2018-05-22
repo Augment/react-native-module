@@ -16,7 +16,8 @@ RCT_EXPORT_MODULE(AugmentReact);
     @"AUGMENT_EVENT_LOADING_OVER":     AUGMENT_EVENT_LOADING_OVER
   };
 }
-    static AGTAugmentSDK *augmentSDK;
+
+static AGTAugmentSDK *augmentSDK;
 + (AGTAugmentSDK*) augmentSDK {
     if (augmentSDK == nil) {
         augmentSDK = [AGTAugmentSDK new];
@@ -83,11 +84,10 @@ RCT_EXPORT_METHOD(pause) {
  * This method is called when the Augment View has been added to the view hierarchy
  */
 - (void) instantiationDone: (AugmentReactPlayerView*) augmentView {
-  self.augmentView = augmentView;
 
-#if AGT_AR_AVAILABLE
-  self.augmentView.augmentPlayer = augmentSDK.augmentPlayer;
-#endif
+//#if AGT_AR_AVAILABLE
+//  self.augmentView.augmentPlayer = augmentSDK.augmentPlayer;
+//#endif
 
   [self startARSession];
 }
@@ -99,10 +99,10 @@ RCT_EXPORT_METHOD(pause) {
  * This method needs to be called after the success of `AugmentReact.start`
  */
 RCT_EXPORT_METHOD(addProductToAugmentPlayer:(NSDictionary *)product resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
-  if (self.augmentView == nil) {
-      [self useRejecter:rejecter withErrorMessage:@"addProductToAugmentPlayer must be used after a success call to start()"];
-      return;
-  }
+//  if (self.augmentView == nil) {
+//      [self useRejecter:rejecter withErrorMessage:@"addProductToAugmentPlayer must be used after a success call to start()"];
+//      return;
+//  }
 
   // Because adding a product to the ARView is a multi step operation
   // We save the callbacks so we can access it latter when the operation
@@ -118,10 +118,10 @@ RCT_EXPORT_METHOD(addProductToAugmentPlayer:(NSDictionary *)product resolver:(RC
  * This method needs to be called after the success of `AugmentReact.start`
  */
 RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
-  if (self.augmentView == nil) {
-      [self useRejecter:rejecter withErrorMessage:@"recenterProducts must be used after a success call to start()"];
-      return;
-  }
+//  if (self.augmentView == nil) {
+//      [self useRejecter:rejecter withErrorMessage:@"recenterProducts must be used after a success call to start()"];
+//      return;
+//  }
     [augmentSDK.augmentPlayer recenterProducts];
 }
 

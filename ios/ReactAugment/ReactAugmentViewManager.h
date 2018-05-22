@@ -9,7 +9,4 @@
 #import "AugmentReactPlayerView.h"
 
 @interface ReactAugmentViewManager : RCTViewManager <AugmentReactPlayerViewDelegate>
-
-//@property (nonatomic, strong) AGTAugmentSDK* augmentSDK;
-
 @end
