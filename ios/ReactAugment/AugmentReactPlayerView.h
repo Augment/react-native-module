@@ -23,6 +23,6 @@ static id<AugmentReactPlayerViewDelegate> InstantiationDelegate;
 
 @interface AugmentReactPlayerView : AGTView
 
-+ (void) SetInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate;
++ (void) setInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate;
 
 @end

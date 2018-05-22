@@ -8,7 +8,7 @@
 
 @implementation AugmentReactPlayerView
 
-+ (void) SetInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate {
++ (void) setInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate {
   InstantiationDelegate = delegate;
 }
 

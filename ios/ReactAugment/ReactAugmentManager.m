@@ -26,7 +26,7 @@ RCT_EXPORT_METHOD(init: (NSDictionary*) data) {
   // Define a delegate for when a player will be instantiated
   // From that point we will start the AR session
   // @see AugmentReactPlayerView for more information
-  [AugmentReactPlayerView SetInstantiationDelegate: self];
+  [AugmentReactPlayerView setInstantiationDelegate: self];
 
   [AGTAugmentSDK setSharedClientID: data[ARG_APP_ID]
                 sharedClientSecret: data[ARG_APP_KEY]
