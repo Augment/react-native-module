@@ -88,17 +88,18 @@ class AugmentReactPlayer extends Component {
         // 4- When the `AugmentReactPlayerNative` view is ready on the native side
         //    it will call the callback/delegate [1] and then goes through our error/success callback [3]
         //    that way we are sure that the "player" is ready to be used and we return `this`
-        AugmentReact.start()
-        .then((success) => {
-            this.props.onPlayerReady(this, null);
-        })
-        .catch((error) => {
-            this.props.onPlayerReady(null, error);
-        });
+        
+        // AugmentReact.start()
+        // .then((success) => {
+        //     this.props.onPlayerReady(this, null);
+        // })
+        // .catch((error) => {
+        //     this.props.onPlayerReady(null, error);
+        // });
     }
 
     componentWillUnmount(){
-      AugmentReact.pause()
+      // AugmentReact.pause()
       loadingProgressSubscription.remove()
       loadingOverSubscription.remove()
     }

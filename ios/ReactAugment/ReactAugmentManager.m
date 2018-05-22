@@ -16,6 +16,13 @@ RCT_EXPORT_MODULE(AugmentReact);
     @"AUGMENT_EVENT_LOADING_OVER":     AUGMENT_EVENT_LOADING_OVER
   };
 }
+    static AGTAugmentSDK *augmentSDK;
++ (AGTAugmentSDK*) augmentSDK {
+    if (augmentSDK == nil) {
+        augmentSDK = [AGTAugmentSDK new];
+    }
+    return augmentSDK;
+}
 
 /**
  * This method corresponds to `AugmentReact.init`
@@ -28,11 +35,12 @@ RCT_EXPORT_METHOD(init: (NSDictionary*) data) {
   // @see AugmentReactPlayerView for more information
 //  [AugmentReactPlayerView setInstantiationDelegate: self];
 
-  [AGTAugmentSDK setSharedClientID: data[ARG_APP_ID]
-                sharedClientSecret: data[ARG_APP_KEY]
-                  sharedVuforiaKey: data[ARG_VUFORIA_KEY]
-  ];
-  self.augmentSDK = [AGTAugmentSDK new];
+   [AGTAugmentSDK setSharedClientID: data[ARG_APP_ID]
+                 sharedClientSecret: data[ARG_APP_KEY]
+                   sharedVuforiaKey: data[ARG_VUFORIA_KEY]
+   ];
+//   self.augmentSDKLocal = [AGTAugmentSDK new];
+//   augmentSDK = self.augmentSDKLocal;
 }
 
 /**
@@ -43,7 +51,7 @@ RCT_EXPORT_METHOD(init: (NSDictionary*) data) {
  */
 RCT_EXPORT_METHOD(checkIfModelDoesExistForUserProduct:(NSDictionary *)product resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
 
-  [self.augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[ARG_IDENTIFIER] brand: product[ARG_BRAND] name: product[ARG_NAME] EAN: product[ARG_EAN] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
+  [augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[ARG_IDENTIFIER] brand: product[ARG_BRAND] name: product[ARG_NAME] EAN: product[ARG_EAN] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
 
     if (error != nil) {
         [self useRejecter:rejecter withErrorMessage:error.localizedDescription];
@@ -67,7 +75,7 @@ RCT_EXPORT_METHOD(start:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRej
 }
 
 RCT_EXPORT_METHOD(pause) {
-    [self.augmentSDK.augmentPlayer pause];
+//    [augmentSDK.augmentPlayer pause];
 }
 
 /**
@@ -78,7 +86,7 @@ RCT_EXPORT_METHOD(pause) {
   self.augmentView = augmentView;
 
 #if AGT_AR_AVAILABLE
-  self.augmentView.augmentPlayer = self.augmentSDK.augmentPlayer;
+  self.augmentView.augmentPlayer = augmentSDK.augmentPlayer;
 #endif
 
   [self startARSession];
@@ -114,7 +122,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
       [self useRejecter:rejecter withErrorMessage:@"recenterProducts must be used after a success call to start()"];
       return;
   }
-    [self.augmentSDK.augmentPlayer recenterProducts];
+    [augmentSDK.augmentPlayer recenterProducts];
 }
 
 #pragma mark - AR implementation
@@ -189,7 +197,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
   [self sendEventLoadingProgress: 0];
 
   // Check if the product is already in cache
-  AGTProduct* cachedProduct = [self.augmentSDK.productsDataController productForIdentifier: product[@"identifier"]];
+  AGTProduct* cachedProduct = [augmentSDK.productsDataController productForIdentifier: product[@"identifier"]];
   if (cachedProduct != nil) {
 
     // No product found in Augment Product Database
@@ -210,7 +218,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
 
 - (void) queryAugmentDatabase: (NSDictionary*) product {
   __weak ReactAugmentManager* weakSelf = self;
-  [self.augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[@"identifier"] brand: product[@"brand"] name: product[@"name"] EAN: product[@"ean"] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
+  [augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[@"identifier"] brand: product[@"brand"] name: product[@"name"] EAN: product[@"ean"] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
 
     // Check if an error occured
     if (error != nil) {
@@ -243,7 +251,7 @@ int lastProgress = 0;
 - (void) addToARView: (AGTProduct*) augmentProduct {
   __weak ReactAugmentManager* weakSelf = self;
 
-  [self.augmentSDK addProductToAugmentPlayer: augmentProduct downloadProgress:^(NSProgress* _Nonnull progress) {
+  [augmentSDK addProductToAugmentPlayer: augmentProduct downloadProgress:^(NSProgress* _Nonnull progress) {
     // Progress callback
     dispatch_async(dispatch_get_main_queue(), ^{
       int p = (int) round(progress.fractionCompleted * 100);
@@ -268,7 +276,7 @@ int lastProgress = 0;
     // If everything is ok we start rendering the model
     if (itemIdentifier != nil) {
 
-      [weakSelf.augmentSDK.augmentPlayer resume];
+      [augmentSDK.augmentPlayer resume];
 
       [weakSelf sendEventLoadingOver];
       [weakSelf productSuccess];

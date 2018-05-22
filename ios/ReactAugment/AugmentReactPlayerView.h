@@ -15,14 +15,12 @@
  */
 @protocol AugmentReactPlayerViewDelegate <NSObject>
 
-- (void) onInstantiationDone: (AugmentReactPlayerView*) augmentView;
+- (void) onInstantiationDone: (AugmentReactPlayerView* _Nullable) augmentView;
 
 @end
 
 @interface AugmentReactPlayerView : AGTView
 
 @property (nonatomic, weak) id<AugmentReactPlayerViewDelegate> augmentReactPlayerViewDelegate;
-
-//+ (void) setInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate;
 
 @end

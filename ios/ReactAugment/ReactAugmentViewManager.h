@@ -10,6 +10,6 @@
 
 @interface ReactAugmentViewManager : RCTViewManager <AugmentReactPlayerViewDelegate>
 
-@property (nonatomic, strong) AGTAugmentSDK* augmentSDK;
+//@property (nonatomic, strong) AGTAugmentSDK* augmentSDK;
 
 @end
