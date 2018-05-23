@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AugmentPlayerSDK/AugmentPlayerSDK.h>
+#import <React/RCTView.h>
 
 @class AugmentReactPlayerView;
 
@@ -21,6 +22,7 @@
 
 @interface AugmentReactPlayerView : AGTView
 
+@property (nonatomic, copy) RCTDirectEventBlock onViewLoaded;
 @property (nonatomic, weak) id<AugmentReactPlayerViewDelegate> augmentReactPlayerViewDelegate;
 
 @end

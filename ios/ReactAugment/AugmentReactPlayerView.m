@@ -16,7 +16,7 @@
     if (self.superview != NULL) {
         [self.augmentReactPlayerViewDelegate onInstantiationDone:self];
     } else {
-//        [self.augmentReactPlayerViewDelegate onInstantiationDone:NULL];
+        [self.augmentReactPlayerViewDelegate onInstantiationDone:NULL];
 //        [self.augmentPlayer pause];
     }
 }

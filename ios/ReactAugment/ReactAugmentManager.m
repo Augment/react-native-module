@@ -17,11 +17,12 @@ RCT_EXPORT_MODULE(AugmentReact);
   };
 }
 
-static AGTAugmentSDK *augmentSDK;
 + (AGTAugmentSDK*) augmentSDK {
-    if (augmentSDK == nil) {
+    static AGTAugmentSDK *augmentSDK;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         augmentSDK = [AGTAugmentSDK new];
-    }
+    });
     return augmentSDK;
 }
 
@@ -52,7 +53,7 @@ RCT_EXPORT_METHOD(init: (NSDictionary*) data) {
  */
 RCT_EXPORT_METHOD(checkIfModelDoesExistForUserProduct:(NSDictionary *)product resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
 
-  [augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[ARG_IDENTIFIER] brand: product[ARG_BRAND] name: product[ARG_NAME] EAN: product[ARG_EAN] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
+  [ReactAugmentManager.augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[ARG_IDENTIFIER] brand: product[ARG_BRAND] name: product[ARG_NAME] EAN: product[ARG_EAN] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
 
     if (error != nil) {
         [self useRejecter:rejecter withErrorMessage:error.localizedDescription];
@@ -122,7 +123,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
 //      [self useRejecter:rejecter withErrorMessage:@"recenterProducts must be used after a success call to start()"];
 //      return;
 //  }
-    [augmentSDK.augmentPlayer recenterProducts];
+    [ReactAugmentManager.augmentSDK.augmentPlayer recenterProducts];
 }
 
 #pragma mark - AR implementation
@@ -197,7 +198,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
   [self sendEventLoadingProgress: 0];
 
   // Check if the product is already in cache
-  AGTProduct* cachedProduct = [augmentSDK.productsDataController productForIdentifier: product[@"identifier"]];
+  AGTProduct* cachedProduct = [ReactAugmentManager.augmentSDK.productsDataController productForIdentifier: product[@"identifier"]];
   if (cachedProduct != nil) {
 
     // No product found in Augment Product Database
@@ -218,7 +219,7 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
 
 - (void) queryAugmentDatabase: (NSDictionary*) product {
   __weak ReactAugmentManager* weakSelf = self;
-  [augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[@"identifier"] brand: product[@"brand"] name: product[@"name"] EAN: product[@"ean"] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
+  [ReactAugmentManager.augmentSDK.productsDataController checkIfModelDoesExistForProductIdentifier: product[@"identifier"] brand: product[@"brand"] name: product[@"name"] EAN: product[@"ean"] completion: ^(AGTProduct* _Nullable augmentProduct, NSError* _Nullable error) {
 
     // Check if an error occured
     if (error != nil) {
@@ -251,7 +252,7 @@ int lastProgress = 0;
 - (void) addToARView: (AGTProduct*) augmentProduct {
   __weak ReactAugmentManager* weakSelf = self;
 
-  [augmentSDK addProductToAugmentPlayer: augmentProduct downloadProgress:^(NSProgress* _Nonnull progress) {
+  [ReactAugmentManager.augmentSDK addProductToAugmentPlayer: augmentProduct downloadProgress:^(NSProgress* _Nonnull progress) {
     // Progress callback
     dispatch_async(dispatch_get_main_queue(), ^{
       int p = (int) round(progress.fractionCompleted * 100);
@@ -276,7 +277,7 @@ int lastProgress = 0;
     // If everything is ok we start rendering the model
     if (itemIdentifier != nil) {
 
-      [augmentSDK.augmentPlayer resume];
+//      [augmentSDK.augmentPlayer resume];
 
       [weakSelf sendEventLoadingOver];
       [weakSelf productSuccess];

@@ -34,7 +34,7 @@ static NSString* ARG_MODEL_NUMBER = @"model_number";
 
 @interface ReactAugmentManager : RCTEventEmitter <RCTBridgeModule>
 
-@property (class) AGTAugmentSDK* augmentSDK;;
+@property (class, readonly) AGTAugmentSDK* augmentSDK;;
 
 @property (nonatomic, copy) RCTPromiseRejectBlock  startErrorPromise;
 @property (nonatomic, copy) RCTPromiseResolveBlock startSuccessPromise;

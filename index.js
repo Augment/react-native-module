@@ -30,6 +30,8 @@ var AugmentReactPlayerNative = requireNativeComponent('AugmentReactPlayerNative'
         loaderCallback: PropTypes.func,
         // onPlayerReady(player: AugmentReactPlayer, errorCallback: (error: [error: string]) => void)
         onPlayerReady: PropTypes.func,
+        // onViewLoaded(void) to notify that the view is visible AR is running
+        onViewLoaded: PropTypes.func,
         // include the default view properties
         ...ViewPropTypes
     },
@@ -50,6 +52,20 @@ class AugmentReactPlayer extends Component {
             AugmentReact.AUGMENT_EVENT_LOADING_OVER,
             this.handleLoadingOver.bind(this)
         )
+        this._onViewLoaded = this._onViewLoaded.bind(this);
+    }
+
+    render() {
+        return (
+            <AugmentReactPlayerNative {...this.props} onViewLoaded={this._onViewLoaded}/>
+        );
+    }
+
+    _onViewLoaded(event: Event) {
+      if (!this.props.onViewLoaded) {
+        return;
+      }
+      this.props.onViewLoaded(this);
     }
 
     handleLoadingProgress(args) {
@@ -88,7 +104,7 @@ class AugmentReactPlayer extends Component {
         // 4- When the `AugmentReactPlayerNative` view is ready on the native side
         //    it will call the callback/delegate [1] and then goes through our error/success callback [3]
         //    that way we are sure that the "player" is ready to be used and we return `this`
-        
+
         // AugmentReact.start()
         // .then((success) => {
         //     this.props.onPlayerReady(this, null);
@@ -102,12 +118,6 @@ class AugmentReactPlayer extends Component {
       // AugmentReact.pause()
       loadingProgressSubscription.remove()
       loadingOverSubscription.remove()
-    }
-
-    render() {
-        return (
-            <AugmentReactPlayerNative {...this.props} />
-        );
     }
 }
 
