@@ -1,12 +1,15 @@
 package com.augment.reactplugin;
 
+import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
-@SuppressWarnings("WeakerAccess")
+import javax.annotation.Nullable;
+import java.util.Map;
+
 public class ReactAugmentPlayerManager extends SimpleViewManager<AugmentReactPlayerView> {
 
-    static final String REACT_CLASS = "AugmentReactPlayerNative";
+    public static final String REACT_CLASS = "AugmentReactPlayerNative";
 
     @Override
     public String getName() {
@@ -16,5 +19,11 @@ public class ReactAugmentPlayerManager extends SimpleViewManager<AugmentReactPla
     @Override
     protected AugmentReactPlayerView createViewInstance(ThemedReactContext reactContext) {
         return new AugmentReactPlayerView(reactContext);
+    }
+
+    @Nullable
+    @Override
+    public Map getExportedCustomDirectEventTypeConstants() {
+        return MapBuilder.of("onViewLoaded", MapBuilder.of("registrationName","onViewLoaded"));
     }
 }

@@ -425,7 +425,7 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
                 product.getString(ARG_NAME)
         );
 
-        if (product.hasKey(ARG_EAN) && !product.getString(ARG_EAN).isEmpty()) {
+        if (product.hasKey(ARG_EAN) && product.getString(ARG_EAN) != null && !product.getString(ARG_EAN).isEmpty()) {
             builder.setEan(product.getString(ARG_EAN));
         }
         return builder.build();
