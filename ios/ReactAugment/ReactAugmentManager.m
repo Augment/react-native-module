@@ -61,7 +61,7 @@ RCT_EXPORT_METHOD(checkIfModelDoesExistForUserProduct:(NSDictionary *)product re
     }
 
     if (augmentProduct != nil){
-        resolver(@[[self getDictionaryForProduct: augmentProduct]]);
+        resolver([self getDictionaryForProduct: augmentProduct]);
     }
   }];
 }
