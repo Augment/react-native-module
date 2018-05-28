@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 
@@ -44,13 +43,13 @@ public class AugmentReactPlayerView extends GLSurfaceView {
         init();
     }
 
-    private void dispatchOnViewLoaded() {
+    private void dispatchOnPlayerReady() {
         WritableMap event = Arguments.createMap();
-        event.putNull("viewLoaded");
+        event.putNull("playerReady");
         ReactContext reactContext = (ReactContext)getContext();
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
                 getId(),
-                "onViewLoaded",
+                "onPlayerReady",
                 event);
     }
 
@@ -67,9 +66,9 @@ public class AugmentReactPlayerView extends GLSurfaceView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        dispatchOnViewLoaded();
         if (instantiationCallback != null) {
             instantiationCallback.playerAttachedToWindow();
+            dispatchOnPlayerReady();
         }
     }
 }

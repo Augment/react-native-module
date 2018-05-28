@@ -24,6 +24,6 @@ public class ReactAugmentPlayerManager extends SimpleViewManager<AugmentReactPla
     @Nullable
     @Override
     public Map getExportedCustomDirectEventTypeConstants() {
-        return MapBuilder.of("onViewLoaded", MapBuilder.of("registrationName","onViewLoaded"));
+        return MapBuilder.of("onPlayerReady", MapBuilder.of("registrationName","onPlayerReady"));
     }
 }

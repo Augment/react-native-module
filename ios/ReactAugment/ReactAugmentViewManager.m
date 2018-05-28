@@ -11,7 +11,7 @@
 
 RCT_EXPORT_MODULE(AugmentReactPlayerNative)
 
-RCT_EXPORT_VIEW_PROPERTY(onViewLoaded, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onPlayerReady, RCTDirectEventBlock)
 
 - (UIView*) view {
     NSLog(@"GET newView");
@@ -32,15 +32,15 @@ RCT_EXPORT_VIEW_PROPERTY(onViewLoaded, RCTDirectEventBlock)
     //    [augmentView.augmentPlayer resume];
     augmentView.augmentPlayer = ReactAugmentManager.augmentSDK.augmentPlayer;
     [ReactAugmentManager.augmentSDK.augmentPlayer resume];
-    [self onViewLoaded:augmentView];
+    [self onPlayerReady:augmentView];
     NSLog(@"instat DONE - exit");
 }
 
-- (void)onViewLoaded:(AugmentReactPlayerView *)augmentView {
-    if (!augmentView.onViewLoaded) {
+- (void)onPlayerReady:(AugmentReactPlayerView *)augmentView {
+    if (!augmentView.onPlayerReady) {
         return;
     }
-    augmentView.onViewLoaded(NULL);
+    augmentView.onPlayerReady(NULL);
 }
 
 @end

@@ -22,7 +22,7 @@
 
 @interface AugmentReactPlayerView : AGTView
 
-@property (nonatomic, copy) RCTDirectEventBlock onViewLoaded;
+@property (nonatomic, copy) RCTDirectEventBlock onPlayerReady;
 @property (nonatomic, weak) id<AugmentReactPlayerViewDelegate> augmentReactPlayerViewDelegate;
 
 @end
