@@ -76,10 +76,6 @@ RCT_EXPORT_METHOD(start:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRej
   self.startSuccessPromise = resolver;
 }
 
-RCT_EXPORT_METHOD(pause) {
-//    [augmentSDK.augmentPlayer pause];
-}
-
 /**
  * AugmentReactPlayerViewDelegate
  * This method is called when the Augment View has been added to the view hierarchy
@@ -124,6 +120,25 @@ RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RC
 //      return;
 //  }
     [ReactAugmentManager.augmentSDK.augmentPlayer recenterProducts];
+}
+
+RCT_EXPORT_METHOD(takeScreenshot:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
+    [ReactAugmentManager.augmentSDK.augmentPlayer takeScreenshotWithCompletion:^(UIImage * _Nullable screenshotImage) {
+        if (screenshotImage != NULL) {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *fileName = [NSString stringWithFormat:@"%@%f.jpg", @"AGT_screenshot_", CFAbsoluteTimeGetCurrent()];
+            NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent: fileName];
+            NSData *photoData = UIImageJPEGRepresentation(screenshotImage, 1);
+            NSError* error;
+            if ([photoData writeToFile:filePath options:NSDataWritingAtomic error:&error]) {
+                resolver(filePath);
+            } else {
+                rejecter(@"savingScreenshot", [error localizedFailureReason], error);
+            }
+        } else {
+            [self useRejecter:rejecter withErrorMessage:@"Error while "];
+        }
+    }];
 }
 
 #pragma mark - AR implementation
