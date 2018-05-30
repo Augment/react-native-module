@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- New code structure
+
+### Added
+- Exposed takeScreenshot method
+
+### Fixed
+- iOS: Second AR launch not working
+- Android: Two models appear when coming back from background
+
+
 
 ## [1.3.3] - 2018-03-20
 ### Changed
