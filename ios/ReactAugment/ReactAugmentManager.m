@@ -136,7 +136,7 @@ RCT_EXPORT_METHOD(takeScreenshot:(RCTPromiseResolveBlock)resolver rejecter:(RCTP
                 rejecter(@"savingScreenshot", [error localizedFailureReason], error);
             }
         } else {
-            [self useRejecter:rejecter withErrorMessage:@"Error while "];
+            [self useRejecter:rejecter withErrorMessage:@"Error while taking screenshot"];
         }
     }];
 }
