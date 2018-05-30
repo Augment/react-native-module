@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+
+## [1.4.0] - 2018-05-30
 ### Changed
 - New code structure
 
@@ -14,8 +17,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - iOS: Second AR launch not working
 - Android: Two models appear when coming back from background
-
-
 
 ## [1.3.3] - 2018-03-20
 ### Changed
