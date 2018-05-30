@@ -1,3 +1,22 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.+'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+}
+
 apply plugin: 'com.android.library'
 
 repositories {
@@ -18,7 +37,7 @@ android {
 }
 
 dependencies {
-    compile "com.facebook.react:react-native:0.19.+"
+    compile "com.facebook.react:react-native:+"
     compile "com.google.zxing:core:3.2.1"
     compile "com.drewnoakes:metadata-extractor:2.9.1"
     compile "com.ar.augment:augment-player-sdk:1.0.3"

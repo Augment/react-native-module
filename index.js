@@ -17,6 +17,8 @@ var AugmentReact = NativeModules.AugmentReact;
 // AugmentReact.AUGMENT_EVENT_LOADING_OVER
 
 const AugmentEventEmitter = new NativeEventEmitter(AugmentReact);
+var loadingProgressSubscription
+var loadingOverSubscription
 
 /**
  * This is the Native View (Player) class that will be extended
@@ -28,6 +30,7 @@ var AugmentReactPlayerNative = requireNativeComponent('AugmentReactPlayerNative'
         loaderCallback: PropTypes.func,
         // onPlayerReady(player: AugmentReactPlayer, errorCallback: (error: [error: string]) => void)
         onPlayerReady: PropTypes.func,
+
         // include the default view properties
         ...ViewPropTypes
     },
@@ -40,14 +43,28 @@ var AugmentReactPlayerNative = requireNativeComponent('AugmentReactPlayerNative'
 class AugmentReactPlayer extends Component {
     constructor(props) {
         super(props);
-        AugmentEventEmitter.addListener(
+        loadingProgressSubscription = AugmentEventEmitter.addListener(
             AugmentReact.AUGMENT_EVENT_LOADING_PROGRESS,
             this.handleLoadingProgress.bind(this)
-        );
-        AugmentEventEmitter.addListener(
+        )
+        loadingOverSubscription = AugmentEventEmitter.addListener(
             AugmentReact.AUGMENT_EVENT_LOADING_OVER,
             this.handleLoadingOver.bind(this)
+        )
+        this._onPlayerReady = this._onPlayerReady.bind(this);
+    }
+
+    render() {
+        return (
+            <AugmentReactPlayerNative {...this.props} onPlayerReady={this._onPlayerReady}/>
         );
+    }
+
+    _onPlayerReady(event: Event) {
+      if (!this.props.onPlayerReady) {
+        return;
+      }
+      this.props.onPlayerReady(this);
     }
 
     handleLoadingProgress(args) {
@@ -86,19 +103,20 @@ class AugmentReactPlayer extends Component {
         // 4- When the `AugmentReactPlayerNative` view is ready on the native side
         //    it will call the callback/delegate [1] and then goes through our error/success callback [3]
         //    that way we are sure that the "player" is ready to be used and we return `this`
-        AugmentReact.start()
-        .then((success) => {
-            this.props.onPlayerReady(this, null);
-        })
-        .catch((error) => {
-            this.props.onPlayerReady(null, error);
-        });
+
+        // AugmentReact.start()
+        // .then((success) => {
+        //     this.props.onPlayerReady(this, null);
+        // })
+        // .catch((error) => {
+        //     this.props.onPlayerReady(null, error);
+        // });
     }
 
-    render() {
-        return (
-            <AugmentReactPlayerNative {...this.props} />
-        );
+    componentWillUnmount(){
+      // AugmentReact.pause()
+      loadingProgressSubscription.remove()
+      loadingOverSubscription.remove()
     }
 }
 

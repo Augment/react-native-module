@@ -7,15 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.ar.augment.arplayer.AugmentPlayer;
-import com.ar.augment.arplayer.AugmentPlayerException;
-import com.ar.augment.arplayer.AugmentPlayerSDK;
-import com.ar.augment.arplayer.InitializationListener;
-import com.ar.augment.arplayer.LoaderCallback;
-import com.ar.augment.arplayer.Product;
-import com.ar.augment.arplayer.ProductDataController;
-import com.ar.augment.arplayer.ProductQuery;
-import com.ar.augment.arplayer.WebserviceException;
+import com.ar.augment.arplayer.*;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
@@ -26,6 +18,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -189,6 +182,21 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
 
         augmentPlayerSDK.getAugmentPlayer().recenterProducts();
         promise.resolve(getMapForSuccess(null));
+    }
+
+    @ReactMethod
+    public void takeScreenshot(@NonNull final Promise promise){
+        augmentPlayerSDK.getAugmentPlayer().takeScreenshot(new ScreenshotTakerCallback() {
+            @Override
+            public void onScreenshotSaved(File file) {
+                promise.resolve(file.getAbsolutePath());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                promise.reject(throwable);
+            }
+        });
     }
 
     // AR Logic
@@ -425,7 +433,7 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
                 product.getString(ARG_NAME)
         );
 
-        if (product.hasKey(ARG_EAN) && !product.getString(ARG_EAN).isEmpty()) {
+        if (product.hasKey(ARG_EAN) && product.getString(ARG_EAN) != null && !product.getString(ARG_EAN).isEmpty()) {
             builder.setEan(product.getString(ARG_EAN));
         }
         return builder.build();

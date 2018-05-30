@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AugmentPlayerSDK/AugmentPlayerSDK.h>
+#import <React/RCTView.h>
 
 @class AugmentReactPlayerView;
 
@@ -15,14 +16,13 @@
  */
 @protocol AugmentReactPlayerViewDelegate <NSObject>
 
-- (void) instantiationDone: (AugmentReactPlayerView*) augmentView;
+- (void) onInstantiationDone: (AugmentReactPlayerView* _Nullable) augmentView;
 
 @end
 
-static id<AugmentReactPlayerViewDelegate> InstantiationDelegate;
-
 @interface AugmentReactPlayerView : AGTView
 
-+ (void) SetInstantiationDelegate: (id<AugmentReactPlayerViewDelegate>) delegate;
+@property (nonatomic, copy) RCTDirectEventBlock onPlayerReady;
+@property (nonatomic, weak) id<AugmentReactPlayerViewDelegate> augmentReactPlayerViewDelegate;
 
 @end

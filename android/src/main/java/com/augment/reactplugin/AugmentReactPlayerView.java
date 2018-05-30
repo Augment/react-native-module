@@ -3,6 +3,10 @@ package com.augment.reactplugin;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 
 @SuppressWarnings("unused")
@@ -39,6 +43,16 @@ public class AugmentReactPlayerView extends GLSurfaceView {
         init();
     }
 
+    private void dispatchOnPlayerReady() {
+        WritableMap event = Arguments.createMap();
+        event.putNull("playerReady");
+        ReactContext reactContext = (ReactContext)getContext();
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+                getId(),
+                "onPlayerReady",
+                event);
+    }
+
     void init() {
         if (instantiationCallback != null) {
             instantiationCallback.instantiationDone(this);
@@ -54,6 +68,7 @@ public class AugmentReactPlayerView extends GLSurfaceView {
         super.onAttachedToWindow();
         if (instantiationCallback != null) {
             instantiationCallback.playerAttachedToWindow();
+            dispatchOnPlayerReady();
         }
     }
 }

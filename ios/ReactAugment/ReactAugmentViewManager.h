@@ -8,6 +8,5 @@
 #import <React/RCTViewManager.h>
 #import "AugmentReactPlayerView.h"
 
-@interface ReactAugmentViewManager : RCTViewManager
-
+@interface ReactAugmentViewManager : RCTViewManager <AugmentReactPlayerViewDelegate>
 @end
