@@ -7,26 +7,12 @@ import { AppRegistry, StyleSheet, View, Text, Button } from 'react-native';
 import { AugmentReact, AugmentReactPlayer } from 'react-native-augment';
 
 var productToSearch
- // = {
- //    identifier: "1",
- //    brand: "Rowenta",
- //    name: "AIR Force Extreme",
- //    ean: "3700342425321"
-// };
-
-// Demo credentials, please replace with yours
-var credentials = {
-    id:  "357fee36746668573ceb2f5957c4869ee1a62a112639bac9b0fae43c7c431692",
-    key: "80ae1420e164e0440d5329067bcdd953e9fa6c63b75c001c06d169a4f11268c5",
-    vuforia: "ATQqCM7/////AAAAGXLs+GRi0UwXh0X+/qQL49dbZGym8kKo+iRtgC95tbJoCWjXXZihDl5pzxoca2JxLcYxBJ2pIeIE4dNcK0etMeb1746L7lq6vSFen43cS7P1P/HXjwHtUouV5Xus2U0F7WHUTKuO629jKFO13fBQczuY52UJcSEhsu9jHPMaupo5CpqQT3TFTQjlhzHhVXiVMEqq7RI+Edwh8TCSfGAbNRdbIELTfK+8YDYqwEHDbp62mFrs68YnCEQZDrpcLyC8WzFCVZtnUq3Cj3YBUfQ6gNnENYiuLf06gAAF/FcaF65VYveGRBbp3hpkqolX28bxPiUYNVknCSFXICPHciVntxF+rcHW5rrX7Cg/IVFGdNRF"
-}
+var toog = false
 
 export default class AugmentReactExample extends Component {
 
     constructor(props) {
         super(props);
-        AugmentReact.init(credentials);
-        this.playerInstance = null;
         this.state = {
             loaderText: "Loading ...",
             loaderShow: true
@@ -59,8 +45,8 @@ export default class AugmentReactExample extends Component {
                         title="Center"
                         onPress={this.centerProduct.bind(this)} />
                     <Button style={styles.button}
-                        title="Buy"
-                        onPress={this.buyProduct.bind(this)} />
+                        title="Take Screenshot"
+                        onPress={this.takeScreenshot.bind(this)} />
                 </View>
             </View>
         );
@@ -83,11 +69,9 @@ export default class AugmentReactExample extends Component {
             return;
         }
 
-        this.playerInstance = player;
-
         AugmentReact.checkIfModelDoesExistForUserProduct(productToSearch)
         .then((product) => {
-          this.playerInstance.addProduct(product[0])
+          AugmentReact.addProductToAugmentPlayer(product)
           .then(() => {
               console.log("The product has been added to the ARView");
           })
@@ -101,15 +85,21 @@ export default class AugmentReactExample extends Component {
     }
 
     centerProduct() {
-        if (!this.playerInstance) {
-            console.log("playerInstance is null");
-            return;
-        }
-        this.playerInstance.recenterProducts();
+      AugmentReact.recenterProducts()
+      .catch((error) => {
+          console.error(error);
+      });
     }
 
-    buyProduct() {
-        alert('This is a demo :)');
+    takeScreenshot() {
+        AugmentReact.takeScreenshot()
+        .then((filePath) => {
+          console.log(filePath)
+          alert(`Screenshot saved at ${filePath}`);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 }
 
