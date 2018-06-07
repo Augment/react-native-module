@@ -7,7 +7,7 @@ We assume that you have all the [dependencies](https://facebook.github.io/react-
 
 __iOS__ : Now you can open Xcode (using the .`xcworkspace` file) and run the app (only) in a device.
 
-__Android__: If you had installed [`react-native-cli`](https://facebook.github.io/react-native/docs/getting-started.html#the-react-native-cli) you can just plug your device (remember to enable USB Debugging) and run `react-native run-android` or you can also import `example/android` in Android Studio and run it.
+__Android__: If you had installed [`react-native-cli`](https://facebook.github.io/react-native/docs/getting-started.html#the-react-native-cli) you can just plug your device (remember to enable USB Debugging) and run `react-native run-android` or you can also import `sample/android` in Android Studio and run it.
 
 If you encounter any problem [let us know](https://github.com/Augment/react-native-module/issues).
 
