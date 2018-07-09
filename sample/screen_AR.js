@@ -56,13 +56,13 @@ export default class AugmentReactExample extends Component {
         })
 
         this.modelGestureEmitter.addListener('ModelAdded',(model3DUuid) => {
-            console.log('Model added with uuid' + model3DUuid);
+            console.log('Model added with uuid ' + model3DUuid);
         })
         this.modelGestureEmitter.addListener('ModelTranslated',(model3DUuid) => {
-            console.log('Model translated with uuid' + model3DUuid);
+            console.log('Model translated with uuid ' + model3DUuid);
         })
         this.modelGestureEmitter.addListener('ModelRotated',(model3DUuid) => {
-            console.log('Model rotated with uuid' + model3DUuid);
+            console.log('Model rotated with uuid ' + model3DUuid);
         })
     }
 
