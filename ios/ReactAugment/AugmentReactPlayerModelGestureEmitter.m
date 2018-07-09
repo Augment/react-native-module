@@ -24,7 +24,7 @@ RCT_EXPORT_MODULE(AugmentReactPlayerModelGestureEmitter);
 }
 
 - (void)stopObserving {
-    ReactAugmentManager.augmentSDK.augmentPlayer.modelGestureDelegate = self;
+    ReactAugmentManager.augmentSDK.augmentPlayer.modelGestureDelegate = nil;
 }
 
 - (NSArray<NSString *> *)supportedEvents

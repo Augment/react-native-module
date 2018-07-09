@@ -24,7 +24,7 @@ RCT_EXPORT_MODULE(AugmentReactPlayerTrackingStatusEmitter);
 }
 
 - (void)stopObserving {
-    ReactAugmentManager.augmentSDK.augmentPlayer.trackingStatusDelegate = self;
+    ReactAugmentManager.augmentSDK.augmentPlayer.trackingStatusDelegate = nil;
 }
 
 - (void)trackStatus:(AGTTrackingStatus)status withErrorMessage:(NSString * _Nullable)errorMessage {
