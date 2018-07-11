@@ -3,7 +3,7 @@
  * It is bundled as an App so you can test it quick
  */
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Text, Button } from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, Button, NativeEventEmitter, NativeModules } from 'react-native';
 import { AugmentReact, AugmentReactPlayer } from 'react-native-augment';
 
 var productToSearch
@@ -17,6 +17,61 @@ export default class AugmentReactExample extends Component {
             loaderText: "Loading ...",
             loaderShow: true
         };
+    }
+
+    componentWillMount() {
+        const { AugmentReactPlayerTrackingStatusEmitter, AugmentReactPlayerModelGestureEmitter } = NativeModules;
+        this.trackingStatusEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerTrackingStatusEmitter);
+        this.modelGestureEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerModelGestureEmitter);
+        this.subscriptions = [
+            // Connect to each tracking status event individually
+            this.trackingStatusEmitter.addListener('Error',(data) => {
+                console.log('An error occured during tracking: ' + data);
+            }),
+            this.trackingStatusEmitter.addListener('FeaturesDetected',() => {
+                console.log('Tracking state changed to FeaturesDetected');
+            }),
+            this.trackingStatusEmitter.addListener('Initializing',() => {
+                console.log('Tracking state changed to Initializing');
+            }),
+            this.trackingStatusEmitter.addListener('LimitedExcessiveMotion',() => {
+                console.log('Tracking state changed to LimitedExcessiveMotion');
+            }),
+            this.trackingStatusEmitter.addListener('LimitedInsufficientFeatures',() => {
+                console.log('Tracking state changed to LimitedInsufficientFeatures');
+            }),
+            this.trackingStatusEmitter.addListener('LimitedRelocalizing',() => {
+                console.log('Tracking state changed to LimitedRelocalizing');
+            }),
+            this.trackingStatusEmitter.addListener('Normal',() => {
+                console.log('Tracking state changed to Normal');
+            }),
+            this.trackingStatusEmitter.addListener('NotAvailable',() => {
+                console.log('Tracking state changed to NotAvailable');
+            }),
+            this.trackingStatusEmitter.addListener('PlaneDetected',() => {
+                console.log('Tracking state changed to PlaneDetected');
+            }),
+            this.trackingStatusEmitter.addListener('TrackerDetected',() => {
+                console.log('Tracking state changed to TrackerDetected');
+            }),
+            // Connect to each gesture event individually
+            this.modelGestureEmitter.addListener('ModelAdded',(model3DUuid) => {
+                console.log('Model added with uuid ' + model3DUuid);
+            }),
+            this.modelGestureEmitter.addListener('ModelTranslated',(model3DUuid) => {
+                console.log('Model translated with uuid ' + model3DUuid);
+            }),
+            this.modelGestureEmitter.addListener('ModelRotated',(model3DUuid) => {
+                console.log('Model rotated with uuid ' + model3DUuid);
+            }),
+        ]
+    }
+
+    componentWillUnmount() {
+        this.subscriptions.forEach(function(subscription) {
+            subscription.remove();
+        });
     }
 
     render() {

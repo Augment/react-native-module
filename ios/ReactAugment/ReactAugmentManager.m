@@ -215,14 +215,6 @@ RCT_EXPORT_METHOD(takeScreenshot:(RCTPromiseResolveBlock)resolver rejecter:(RCTP
   // Check if the product is already in cache
   AGTProduct* cachedProduct = [ReactAugmentManager.augmentSDK.productsDataController productForIdentifier: product[@"identifier"]];
   if (cachedProduct != nil) {
-
-    // No product found in Augment Product Database
-    if (cachedProduct == AGTProduct.unfoundProduct) {
-      [self sendEventLoadingOver];
-      [self productError: @"This product is not available yet"];
-      return;
-    }
-
     // Add the product to the AR view
     [self addToARView: cachedProduct];
   }
