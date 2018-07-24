@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.3",
-    "react-native-augment": "1.4.0",
+    "react-native-augment": "file:../react-native-augment-2.0.0-RC1.tgz",
     "react-navigation": "^1.5.11"
   },
   "devDependencies": {
