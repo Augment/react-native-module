@@ -23,10 +23,9 @@ class HomeScreen extends React.Component {
           title="Open AR"
           onPress={() => this.props.navigation.navigate('ARScreen', {
               productToSearch: {
-                identifier: "1",
-                brand: "Rowenta",
-                name: "AIR Force Extreme",
-                ean: "3700342425321"
+                identifier: "5",
+                brand: "Apple",
+                name: "Ipad"
               }
           })} />
       </View>

@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text, Button, NativeEventEmitter, NativeModules } from 'react-native';
 import { AugmentReact, AugmentReactPlayer } from 'react-native-augment';
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 var productToSearch
 var toog = false
@@ -26,43 +27,56 @@ export default class AugmentReactExample extends Component {
         this.subscriptions = [
             // Connect to each tracking status event individually
             this.trackingStatusEmitter.addListener('Error',(data) => {
+              this.refs.toast.show('Error');
                 console.log('An error occured during tracking: ' + data);
             }),
             this.trackingStatusEmitter.addListener('FeaturesDetected',() => {
+              this.refs.toast.show('FeaturesDetected');
                 console.log('Tracking state changed to FeaturesDetected');
             }),
             this.trackingStatusEmitter.addListener('Initializing',() => {
+              this.refs.toast.show('Initializing', DURATION.FOREVER);
                 console.log('Tracking state changed to Initializing');
             }),
             this.trackingStatusEmitter.addListener('LimitedExcessiveMotion',() => {
+              this.refs.toast.show('ModelAdded');
                 console.log('Tracking state changed to LimitedExcessiveMotion');
             }),
             this.trackingStatusEmitter.addListener('LimitedInsufficientFeatures',() => {
+              this.refs.toast.show('LimitedInsufficientFeatures');
                 console.log('Tracking state changed to LimitedInsufficientFeatures');
             }),
             this.trackingStatusEmitter.addListener('LimitedRelocalizing',() => {
+              this.refs.toast.show('ModelAdded');
                 console.log('Tracking state changed to LimitedRelocalizing');
             }),
             this.trackingStatusEmitter.addListener('Normal',() => {
+              this.refs.toast.show('Normal');
                 console.log('Tracking state changed to Normal');
             }),
             this.trackingStatusEmitter.addListener('NotAvailable',() => {
+              this.refs.toast.show('ModelAdded');
                 console.log('Tracking state changed to NotAvailable');
             }),
             this.trackingStatusEmitter.addListener('PlaneDetected',() => {
+              this.refs.toast.show('ModelAdded');
                 console.log('Tracking state changed to PlaneDetected');
             }),
             this.trackingStatusEmitter.addListener('TrackerDetected',() => {
+              this.refs.toast.show('ModelAdded');
                 console.log('Tracking state changed to TrackerDetected');
             }),
             // Connect to each gesture event individually
             this.modelGestureEmitter.addListener('ModelAdded',(model3DUuid) => {
+              this.refs.toast.show('ModelAdded');
                 console.log('Model added with uuid ' + model3DUuid);
             }),
             this.modelGestureEmitter.addListener('ModelTranslated',(model3DUuid) => {
+              this.refs.toast.show('ModelTranslated');
                 console.log('Model translated with uuid ' + model3DUuid);
             }),
             this.modelGestureEmitter.addListener('ModelRotated',(model3DUuid) => {
+              this.refs.toast.show('ModelRotated');
                 console.log('Model rotated with uuid ' + model3DUuid);
             }),
         ]
@@ -77,10 +91,9 @@ export default class AugmentReactExample extends Component {
     render() {
         const { params } = this.props.navigation.state;
         productToSearch = params ? params.productToSearch : {
-                                                              identifier: "1",
-                                                              brand: "Rowenta",
-                                                              name: "AIR Force Extreme",
-                                                              ean: "3700342425321"
+          identifier: "4",
+          brand: "Apple",
+          name: "Ipad"
                                                             };
         let displayMode = this.state.loaderShow ? "flex" : "none";
 
@@ -103,6 +116,7 @@ export default class AugmentReactExample extends Component {
                         title="Take Screenshot"
                         onPress={this.takeScreenshot.bind(this)} />
                 </View>
+                <Toast ref="toast"/>
             </View>
         );
     }
