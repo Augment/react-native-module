@@ -10,6 +10,8 @@
 		02A578541EB38E18001562F1 /* AugmentReactPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5784E1EB38E18001562F1 /* AugmentReactPlayerView.m */; };
 		02A578551EB38E18001562F1 /* ReactAugmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A578501EB38E18001562F1 /* ReactAugmentManager.m */; };
 		02A578561EB38E18001562F1 /* ReactAugmentViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A578521EB38E18001562F1 /* ReactAugmentViewManager.m */; };
+		F4098AC320F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4098AC220F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m */; };
+		F4098AC620F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4098AC520F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,10 @@
 		02A578501EB38E18001562F1 /* ReactAugmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactAugmentManager.m; sourceTree = "<group>"; };
 		02A578511EB38E18001562F1 /* ReactAugmentViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactAugmentViewManager.h; sourceTree = "<group>"; };
 		02A578521EB38E18001562F1 /* ReactAugmentViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactAugmentViewManager.m; sourceTree = "<group>"; };
+		F4098AC120F3A0610059D4CC /* AugmentReactPlayerTrackingStatusEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AugmentReactPlayerTrackingStatusEmitter.h; sourceTree = "<group>"; };
+		F4098AC220F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AugmentReactPlayerTrackingStatusEmitter.m; sourceTree = "<group>"; };
+		F4098AC420F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AugmentReactPlayerModelGestureEmitter.h; sourceTree = "<group>"; };
+		F4098AC520F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AugmentReactPlayerModelGestureEmitter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,10 @@
 				02A578521EB38E18001562F1 /* ReactAugmentViewManager.m */,
 				02A5784D1EB38E18001562F1 /* AugmentReactPlayerView.h */,
 				02A5784E1EB38E18001562F1 /* AugmentReactPlayerView.m */,
+				F4098AC120F3A0610059D4CC /* AugmentReactPlayerTrackingStatusEmitter.h */,
+				F4098AC220F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m */,
+				F4098AC420F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.h */,
+				F4098AC520F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m */,
 			);
 			path = ReactAugment;
 			sourceTree = "<group>";
@@ -133,7 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				02A578561EB38E18001562F1 /* ReactAugmentViewManager.m in Sources */,
+				F4098AC620F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m in Sources */,
 				02A578541EB38E18001562F1 /* AugmentReactPlayerView.m in Sources */,
+				F4098AC320F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m in Sources */,
 				02A578551EB38E18001562F1 /* ReactAugmentManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

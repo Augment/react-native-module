@@ -1,14 +1,24 @@
 {
     "name": "react-native-augment",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "Augment Plugin for the Augment Mobile SDK",
     "homepage": "https://developers.augment.com",
+    "bugs": "https://github.com/Augment/react-native-module/issues",
     "author": "Augment <dev@augment.com> (https://developers.augment.com)",
     "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/Augment/react-native-module.git"
     },
+    "files": [
+        "LICENSE",
+        "README.md",
+        "CHANGELOG.md",
+        "index.js",
+        "android/",
+        "ios/",
+        "augment-data/"
+    ],
     "keywords": [
         "augment",
         "ar",
