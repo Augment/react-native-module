@@ -21,6 +21,7 @@ RCT_EXPORT_VIEW_PROPERTY(onPlayerReady, RCTDirectEventBlock)
 
 - (void)onInstantiationDone:(AugmentReactPlayerView *)augmentView {
     if (augmentView == NULL) {
+      [ReactAugmentManager.augmentSDK.augmentPlayer pause];
       [ReactAugmentManager.augmentSDK.augmentPlayer unloadAll];
       return;
     }

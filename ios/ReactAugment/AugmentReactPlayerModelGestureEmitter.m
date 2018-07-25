@@ -12,7 +12,9 @@
 @interface AugmentReactPlayerModelGestureEmitter () <AGTAugmentPlayerModelGestureDelegate>
 @end
 
-@implementation AugmentReactPlayerModelGestureEmitter
+@implementation AugmentReactPlayerModelGestureEmitter {
+  bool hasListeners;
+}
 RCT_EXPORT_MODULE(AugmentReactPlayerModelGestureEmitter);
 
 - (dispatch_queue_t)methodQueue {
@@ -20,10 +22,12 @@ RCT_EXPORT_MODULE(AugmentReactPlayerModelGestureEmitter);
 }
 
 - (void)startObserving {
+    hasListeners = YES;
     ReactAugmentManager.augmentSDK.augmentPlayer.modelGestureDelegate = self;
 }
 
 - (void)stopObserving {
+    hasListeners = NO;
     ReactAugmentManager.augmentSDK.augmentPlayer.modelGestureDelegate = nil;
 }
 
@@ -38,15 +42,21 @@ RCT_EXPORT_MODULE(AugmentReactPlayerModelGestureEmitter);
 
 
 - (void)onModelAdded:(NSString * _Nonnull)model3DUuid {
-    [self sendEventWithName:@"ModelAdded" body:model3DUuid];
+    if (hasListeners) {
+      [self sendEventWithName:@"ModelAdded" body:model3DUuid];
+    }
 }
 
 - (void)onModelRotated:(NSString * _Nonnull)model3DUuid {
+  if (hasListeners) {
     [self sendEventWithName:@"ModelRotated" body:model3DUuid];
+  }
 }
 
 - (void)onModelTranslated:(NSString * _Nonnull)model3DUuid {
+  if (hasListeners) {
     [self sendEventWithName:@"ModelTranslated" body:model3DUuid];
+  }
 }
 
 @end
