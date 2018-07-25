@@ -12,7 +12,9 @@
 @interface AugmentReactPlayerTrackingStatusEmitter () <AGTAugmentPlayerTrackingStatusDelegate>
 @end
 
-@implementation AugmentReactPlayerTrackingStatusEmitter
+@implementation AugmentReactPlayerTrackingStatusEmitter {
+  bool hasListeners;
+}
 RCT_EXPORT_MODULE(AugmentReactPlayerTrackingStatusEmitter);
 
 - (dispatch_queue_t)methodQueue {
@@ -20,15 +22,19 @@ RCT_EXPORT_MODULE(AugmentReactPlayerTrackingStatusEmitter);
 }
 
 - (void)startObserving {
+    hasListeners = YES;
     ReactAugmentManager.augmentSDK.augmentPlayer.trackingStatusDelegate = self;
 }
 
 - (void)stopObserving {
+    hasListeners = NO;
     ReactAugmentManager.augmentSDK.augmentPlayer.trackingStatusDelegate = nil;
 }
 
 - (void)trackStatus:(AGTTrackingStatus)status withErrorMessage:(NSString * _Nullable)errorMessage {
-    [self sendEventWithName:[self.class trackingStatusName:status] body:(errorMessage ?: @"")];
+    if (hasListeners) { // Only send events if anyone is listening
+      [self sendEventWithName:[self.class trackingStatusName:status] body:(errorMessage ?: @"")];
+    }
 }
 
 - (NSArray<NSString *> *)supportedEvents
