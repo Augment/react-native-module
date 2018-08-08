@@ -14,6 +14,10 @@ var credentials = {
 
 AugmentReact.init(credentials);
 
+AugmentReact.isARKitAvailable((_, isAvailable) => {
+  console.log('isARKitAvailable=' + isAvailable);
+})
+
 class HomeScreen extends React.Component {
   render() {
     return (

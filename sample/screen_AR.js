@@ -24,6 +24,11 @@ export default class AugmentReactExample extends Component {
         const { AugmentReactPlayerTrackingStatusEmitter, AugmentReactPlayerModelGestureEmitter } = NativeModules;
         this.trackingStatusEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerTrackingStatusEmitter);
         this.modelGestureEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerModelGestureEmitter);
+
+        AugmentReact.isARKitAvailable((_, isAvailable) => {
+          console.log('isARKitAvailable=' + isAvailable);
+        })
+
         this.subscriptions = [
             // Connect to each tracking status event individually
             this.trackingStatusEmitter.addListener('Error',(data) => {
