@@ -5,6 +5,7 @@
 //
 
 #import "ReactAugmentManager.h"
+#import <ARKit/ARKit.h>
 
 @implementation ReactAugmentManager
 
@@ -110,15 +111,21 @@ RCT_EXPORT_METHOD(addProductToAugmentPlayer:(NSDictionary *)product resolver:(RC
   [self getProduct: product];
 }
 
+RCT_EXPORT_METHOD(isARKitAvailable:(RCTResponseSenderBlock)callback) {
+    BOOL isARKitAvailable = NO;
+    if (@available(iOS 11.0, *)) {
+        if ([ARWorldTrackingConfiguration isSupported]) {
+            isARKitAvailable = YES;
+        }
+    }
+    callback(@[[NSNull null], @(isARKitAvailable)]);
+}
+
 /**
  * This method corresponds to `AugmentReact.recenterProducts`
  * This method needs to be called after the success of `AugmentReact.start`
  */
 RCT_EXPORT_METHOD(recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter) {
-//  if (self.augmentView == nil) {
-//      [self useRejecter:rejecter withErrorMessage:@"recenterProducts must be used after a success call to start()"];
-//      return;
-//  }
     [ReactAugmentManager.augmentSDK.augmentPlayer recenterProducts];
 }
 

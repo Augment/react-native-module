@@ -42,6 +42,7 @@ static NSString* ARG_MODEL_NUMBER = @"model_number";
 @property (nonatomic, copy) RCTPromiseResolveBlock productSuccessPromise;
 
 - (void) init:(NSDictionary*) data;
+- (void) isARKitAvailable:(RCTResponseSenderBlock) callback;
 - (void) checkIfModelDoesExistForUserProduct: (NSDictionary*) product resolver: (RCTPromiseResolveBlock) resolver rejecter:(RCTPromiseRejectBlock) rejecter;
 - (void) start: (RCTPromiseResolveBlock) resolver rejecter: (RCTPromiseRejectBlock) rejecter;
 - (void) addProductToAugmentPlayer: (NSDictionary*) product resolver: (RCTPromiseResolveBlock) resolver rejecter:(RCTPromiseRejectBlock) rejecter;
