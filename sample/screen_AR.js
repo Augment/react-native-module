@@ -24,6 +24,11 @@ export default class AugmentReactExample extends Component {
         const { AugmentReactPlayerTrackingStatusEmitter, AugmentReactPlayerModelGestureEmitter } = NativeModules;
         this.trackingStatusEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerTrackingStatusEmitter);
         this.modelGestureEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerModelGestureEmitter);
+
+        AugmentReact.isARKitAvailable((_, isAvailable) => {
+          console.log('isARKitAvailable=' + isAvailable);
+        })
+
         this.subscriptions = [
             // Connect to each tracking status event individually
             this.trackingStatusEmitter.addListener('Error',(data) => {
@@ -39,7 +44,7 @@ export default class AugmentReactExample extends Component {
                 console.log('Tracking state changed to Initializing');
             }),
             this.trackingStatusEmitter.addListener('LimitedExcessiveMotion',() => {
-              this.refs.toast.show('ModelAdded');
+              this.refs.toast.show('LimitedExcessiveMotion');
                 console.log('Tracking state changed to LimitedExcessiveMotion');
             }),
             this.trackingStatusEmitter.addListener('LimitedInsufficientFeatures',() => {
@@ -47,7 +52,7 @@ export default class AugmentReactExample extends Component {
                 console.log('Tracking state changed to LimitedInsufficientFeatures');
             }),
             this.trackingStatusEmitter.addListener('LimitedRelocalizing',() => {
-              this.refs.toast.show('ModelAdded');
+              this.refs.toast.show('LimitedRelocalizing');
                 console.log('Tracking state changed to LimitedRelocalizing');
             }),
             this.trackingStatusEmitter.addListener('Normal',() => {
@@ -55,15 +60,15 @@ export default class AugmentReactExample extends Component {
                 console.log('Tracking state changed to Normal');
             }),
             this.trackingStatusEmitter.addListener('NotAvailable',() => {
-              this.refs.toast.show('ModelAdded');
+              this.refs.toast.show('NotAvailable');
                 console.log('Tracking state changed to NotAvailable');
             }),
             this.trackingStatusEmitter.addListener('PlaneDetected',() => {
-              this.refs.toast.show('ModelAdded');
+              this.refs.toast.show('PlaneDetected');
                 console.log('Tracking state changed to PlaneDetected');
             }),
             this.trackingStatusEmitter.addListener('TrackerDetected',() => {
-              this.refs.toast.show('ModelAdded');
+              this.refs.toast.show('TrackerDetected');
                 console.log('Tracking state changed to TrackerDetected');
             }),
             // Connect to each gesture event individually
