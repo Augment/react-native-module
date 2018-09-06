@@ -5,7 +5,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { NativeEventEmitter, NativeModules, requireNativeComponent, ViewPropTypes } from 'react-native';
+import ReactNative, { NativeEventEmitter, NativeModules, requireNativeComponent, ViewPropTypes, UIManager } from 'react-native';
 import PropTypes from 'prop-types';
 
 /**
@@ -61,10 +61,11 @@ class AugmentReactPlayer extends Component {
         );
     }
 
-    _onPlayerReady(event: Event) {
+    _onPlayerReady(...args) {
       if (!this.props.onPlayerReady) {
         return;
       }
+      console.log(this.values);
       this.props.onPlayerReady(this);
     }
 
@@ -88,7 +89,13 @@ class AugmentReactPlayer extends Component {
     }
 
     addProduct(product) {
-        return this.augmentPlayer.addProduct(product);
+      AugmentReact.addProduct(product);
+      // UIManager.dispatchViewManagerCommand(
+      //   ReactNative.findNodeHandle(this),
+      //   UIManager.AugmentReactPlayerNative.Commands.addProduct,
+      //   [product],
+      // );
+        // return this.augmentPlayer.addProduct(product);
     }
 
     // Reminder, this is the React Component Lifecycle:

@@ -26,6 +26,8 @@ RCT_EXPORT_MODULE(AugmentReact);
     return augmentSDK;
 }
 
++ (BOOL)requiresMainQueueSetup { return YES; }
+
 /**
  * This method corresponds to `AugmentReact.init`
  * data is a Map object with "id" "key" "vuforia" keys

@@ -47,7 +47,7 @@ RCT_EXPORT_VIEW_PROPERTY(onLoadingDidFinish, RCTBubblingEventBlock)
     if (!augmentView.onPlayerReady) {
         return;
     }
-    augmentView.onPlayerReady(NULL);
+    augmentView.onPlayerReady(@{@"augmentView": augmentView});
 }
 
 /**
