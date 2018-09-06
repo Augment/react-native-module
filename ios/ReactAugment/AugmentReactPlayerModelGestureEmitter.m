@@ -8,8 +8,10 @@
 
 #import "AugmentReactPlayerModelGestureEmitter.h"
 #import "ReactAugmentManager.h"
+@import AugmentPlayerSDK;
 
 @interface AugmentReactPlayerModelGestureEmitter () <AGTAugmentPlayerModelGestureDelegate>
+@property (nonatomic, weak) id<AGTAugmentPlayer> augmentPlayer;
 @end
 
 @implementation AugmentReactPlayerModelGestureEmitter {
@@ -23,12 +25,12 @@ RCT_EXPORT_MODULE(AugmentReactPlayerModelGestureEmitter);
 
 - (void)startObserving {
     hasListeners = YES;
-    ReactAugmentManager.augmentSDK.augmentPlayer.modelGestureDelegate = self;
+    _augmentPlayer.modelGestureDelegate = self;
 }
 
 - (void)stopObserving {
     hasListeners = NO;
-    ReactAugmentManager.augmentSDK.augmentPlayer.modelGestureDelegate = nil;
+    _augmentPlayer.modelGestureDelegate = nil;
 }
 
 - (NSArray<NSString *> *)supportedEvents

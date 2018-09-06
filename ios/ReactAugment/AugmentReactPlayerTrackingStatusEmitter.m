@@ -9,7 +9,8 @@
 #import "AugmentReactPlayerTrackingStatusEmitter.h"
 #import "ReactAugmentManager.h"
 
-@interface AugmentReactPlayerTrackingStatusEmitter () <AGTAugmentPlayerTrackingStatusDelegate>
+@interface AugmentReactPlayerTrackingStatusEmitter () <AGTTrackingStatusDelegate>
+@property (nonatomic, weak) id<AGTAugmentPlayer> augmentPlayer;
 @end
 
 @implementation AugmentReactPlayerTrackingStatusEmitter {
@@ -23,12 +24,12 @@ RCT_EXPORT_MODULE(AugmentReactPlayerTrackingStatusEmitter);
 
 - (void)startObserving {
     hasListeners = YES;
-    ReactAugmentManager.augmentSDK.augmentPlayer.trackingStatusDelegate = self;
+    _augmentPlayer.trackingStatusDelegate = self;
 }
 
 - (void)stopObserving {
     hasListeners = NO;
-    ReactAugmentManager.augmentSDK.augmentPlayer.trackingStatusDelegate = nil;
+    _augmentPlayer.trackingStatusDelegate = nil;
 }
 
 - (void)trackStatus:(AGTTrackingStatus)status withErrorMessage:(NSString * _Nullable)errorMessage {

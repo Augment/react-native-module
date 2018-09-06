@@ -1,34 +1,39 @@
 PODS:
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFOAuth2Manager (3.0.0):
-    - AFNetworking/NSURLSession (~> 3.0)
-  - AugmentPlayerSDK (2.1.3):
-    - AFOAuth2Manager (~> 3.0.0)
-    - AutoCoding (~> 2.2.1)
-  - AutoCoding (2.2.3)
+  - Alamofire (4.7.3)
+  - AugmentPlayerSDK (4.0.3):
+    - Alamofire (~> 4.7)
+    - CommonCryptoModule
+    - JWTDecode
+    - Moya (~> 11.0)
+  - CommonCryptoModule (1.0.2)
+  - JWTDecode (2.1.1)
+  - Moya (11.0.2):
+    - Moya/Core (= 11.0.2)
+  - Moya/Core (11.0.2):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Result (3.2.4)
 
 DEPENDENCIES:
-  - AugmentPlayerSDK (= 2.1.3)
+  - AugmentPlayerSDK (= 4.0.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AFNetworking
-    - AFOAuth2Manager
+    - Alamofire
     - AugmentPlayerSDK
-    - AutoCoding
+    - CommonCryptoModule
+    - JWTDecode
+    - Moya
+    - Result
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
-  AugmentPlayerSDK: 40732a8699c7421eeaffd27dfc120b3f0b075448
-  AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AugmentPlayerSDK: 580f75e3d6430d518dd5b8f5a7c10e8cbf4fb6b2
+  CommonCryptoModule: 63a68b57abed79655b3a01011419bf037a05b0a0
+  JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
+  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
 
-PODFILE CHECKSUM: 82309c79bd9f1ffa1bc187b476a72dadc652f457
+PODFILE CHECKSUM: de87ccc4c74888f921afe2cd061019abb2289262
 
 COCOAPODS: 1.5.3

@@ -7,6 +7,8 @@
 #import <UIKit/UIKit.h>
 #import <AugmentPlayerSDK/AugmentPlayerSDK.h>
 #import <React/RCTView.h>
+#import <React/RCTBridgeModule.h>
+#import "ReactAugmentManager.h"
 
 @class AugmentReactPlayerView;
 
@@ -20,9 +22,22 @@
 
 @end
 
-@interface AugmentReactPlayerView : AGTView
+@interface AugmentReactPlayerView : UIView
+@property (nonatomic, copy) RCTPromiseRejectBlock  startErrorPromise;
+@property (nonatomic, copy) RCTPromiseResolveBlock startSuccessPromise;
+@property (nonatomic, copy) RCTPromiseRejectBlock  productErrorPromise;
+@property (nonatomic, copy) RCTPromiseResolveBlock productSuccessPromise;
 
+@property (nonatomic, weak) ReactAugmentManager *manager;
+@property (nonatomic, weak) AGTView *arView;
 @property (nonatomic, copy) RCTDirectEventBlock onPlayerReady;
 @property (nonatomic, weak) id<AugmentReactPlayerViewDelegate> augmentReactPlayerViewDelegate;
 
+@property (nonatomic, copy) RCTBubblingEventBlock onLoadingProgressDidChange;
+@property (nonatomic, copy) RCTBubblingEventBlock onLoadingDidFinish;
+
+- (void) start: (RCTPromiseResolveBlock) resolver rejecter: (RCTPromiseRejectBlock) rejecter;
+- (void) addProduct:(NSDictionary*)product resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter;
+- (void) recenterProducts:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter;
+- (void) takeScreenshot:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)rejecter;
 @end

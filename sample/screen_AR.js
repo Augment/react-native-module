@@ -18,6 +18,7 @@ export default class AugmentReactExample extends Component {
             loaderText: "Loading ...",
             loaderShow: true
         };
+        this.augmentPlayer = React.createRef();
     }
 
     componentWillMount() {
@@ -105,6 +106,7 @@ export default class AugmentReactExample extends Component {
         return (
             <View style={styles.container} pointerEvents={'none','box-none'}>
                 <AugmentReactPlayer style={styles.augmentPlayer}
+                    ref={this.augmentPlayer}
                     onPlayerReady={this.business.bind(this)}
                     loaderCallback={this.loader.bind(this)}
                 />
@@ -145,13 +147,16 @@ export default class AugmentReactExample extends Component {
 
         AugmentReact.checkIfModelDoesExistForUserProduct(productToSearch)
         .then((product) => {
-          AugmentReact.addProductToAugmentPlayer(product)
-          .then(() => {
-              console.log("The product has been added to the ARView");
-          })
-          .catch((error) => {
-              console.error(error);
-          });
+          console.log(player);
+          console.log(AugmentReact);
+          console.log(AugmentReactPlayer);
+          player.addProduct(product)
+          // .then(() => {
+          //     console.log("The product has been added to the ARView");
+          // })
+          // .catch((error) => {
+          //     console.error(error);
+          // });
         })
         .catch((error) => {
             console.error(error);
@@ -159,14 +164,14 @@ export default class AugmentReactExample extends Component {
     }
 
     centerProduct() {
-      AugmentReact.recenterProducts()
+      this.augmentPlayer.recenterProducts()
       .catch((error) => {
           console.error(error);
       });
     }
 
     takeScreenshot() {
-        AugmentReact.takeScreenshot()
+        this.augmentPlayer.takeScreenshot()
         .then((filePath) => {
           console.log(filePath)
           alert(`Screenshot saved at ${filePath}`);

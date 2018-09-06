@@ -38,6 +38,8 @@
 		F4098AC220F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AugmentReactPlayerTrackingStatusEmitter.m; sourceTree = "<group>"; };
 		F4098AC420F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AugmentReactPlayerModelGestureEmitter.h; sourceTree = "<group>"; };
 		F4098AC520F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AugmentReactPlayerModelGestureEmitter.m; sourceTree = "<group>"; };
+		F4DDF307214139B100FF47D8 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = AFNetworking.framework; path = AFNetworking/AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4DDF3162141567300FF47D8 /* AugmentReactConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AugmentReactConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				02A578421EB38DC2001562F1 /* ReactAugment */,
 				02A578411EB38DC2001562F1 /* Products */,
+				F4DDF306214139B100FF47D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,8 +83,17 @@
 				F4098AC220F3A0620059D4CC /* AugmentReactPlayerTrackingStatusEmitter.m */,
 				F4098AC420F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.h */,
 				F4098AC520F3A0A50059D4CC /* AugmentReactPlayerModelGestureEmitter.m */,
+				F4DDF3162141567300FF47D8 /* AugmentReactConstants.h */,
 			);
 			path = ReactAugment;
+			sourceTree = "<group>";
+		};
+		F4DDF306214139B100FF47D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4DDF307214139B100FF47D8 /* AFNetworking.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/Pods/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -255,6 +268,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/Pods/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

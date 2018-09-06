@@ -52,11 +52,12 @@ class AugmentReactPlayer extends Component {
             this.handleLoadingOver.bind(this)
         )
         this._onPlayerReady = this._onPlayerReady.bind(this);
+        this.augmentPlayer = React.createRef();
     }
 
     render() {
         return (
-            <AugmentReactPlayerNative {...this.props} onPlayerReady={this._onPlayerReady}/>
+            <AugmentReactPlayerNative {...this.props} ref={this.augmentPlayer} onPlayerReady={this._onPlayerReady}/>
         );
     }
 
@@ -80,14 +81,14 @@ class AugmentReactPlayer extends Component {
     }
 
     recenterProducts() {
-        AugmentReact.recenterProducts()
+        this.augmentPlayer.recenterProducts()
         .catch((error) => {
             console.error(error);
         });
     }
 
     addProduct(product) {
-        return AugmentReact.addProductToAugmentPlayer(product);
+        return this.augmentPlayer.addProduct(product);
     }
 
     // Reminder, this is the React Component Lifecycle:
@@ -104,7 +105,7 @@ class AugmentReactPlayer extends Component {
         //    it will call the callback/delegate [1] and then goes through our error/success callback [3]
         //    that way we are sure that the "player" is ready to be used and we return `this`
 
-        // AugmentReact.start()
+        // this.augmentPlayer.start()
         // .then((success) => {
         //     this.props.onPlayerReady(this, null);
         // })
@@ -114,7 +115,7 @@ class AugmentReactPlayer extends Component {
     }
 
     componentWillUnmount(){
-      // AugmentReact.pause()
+      // this.augmentPlayer.pause()
       loadingProgressSubscription.remove()
       loadingOverSubscription.remove()
     }
