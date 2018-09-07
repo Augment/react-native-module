@@ -85,7 +85,7 @@ export default class ARScreen extends React.Component {
     centerProduct() {
       this.augmentPlayer.recenterProducts()
       .catch((error) => {
-          this.refs.toast.show(error);   
+          this.refs.toast.show(error);
       });
     }
 
@@ -103,7 +103,7 @@ export default class ARScreen extends React.Component {
     onTrackingStatusChanged = ({ status, message }) => {
       switch (status) {
         case AugmentPlayer.Constants.TrackingStatus.error:
-          console.log('An error occured during tracking: ' + data);
+          console.log('An error occured during tracking: ' + message);
           break;
         case AugmentPlayer.Constants.TrackingStatus.featuresDetected:
           console.log('Tracking state changed to FeaturesDetected');
