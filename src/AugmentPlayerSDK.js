@@ -18,7 +18,21 @@ import PropTypes from 'prop-types'
 /**
 * This is the Native class interface for javascript only parts
 */
-var RNAugmentPlayerSDK = NativeModules.RNAugmentPlayerSDK
+const RNAugmentPlayerSDK = (Platform.OS === 'ios') ? NativeModules.RNAugmentPlayerSDK : {
+  init: () => {
+      return;
+  },
+
+  checkIfModelDoesExistForUserProduct: (productToSearch) => {
+      return new Promise((resolve, reject) => {
+          reject("AugmentPlayerSDK is currently not available on Android");
+      });
+  },
+
+  isARKitAvailable: (callback) => {
+    return callback(false)
+  }
+}
 
 // These are defined by the Native module and are main event sent by Augment SDK
 // AugmentReact.AUGMENT_EVENT_LOADING_PROGRESS
@@ -50,14 +64,10 @@ export default class AugmentPlayerSDK {
   }
 
   static isARKitAvailable(): Promise<Boolean> {
-    if (Platform.OS === 'ios') {
-      return new Promise(resolve => {
-        RNAugmentPlayerSDK.isARKitAvailable((isAvailable) => {
-          resolve(isAvailable);
-        })
-      });
-    } else {
-      return new Promise(resolve => { resolve(false); });
-    }
+    return new Promise(resolve => {
+      RNAugmentPlayerSDK.isARKitAvailable((isAvailable) => {
+        resolve(isAvailable);
+      })
+    });
   }
 }
