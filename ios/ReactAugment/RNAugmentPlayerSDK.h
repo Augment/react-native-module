@@ -10,12 +10,10 @@
 #import <React/RCTEventEmitter.h>
 #import <AugmentPlayerSDK/AugmentPlayerSDK.h>
 
-@interface ReactAugmentManager : RCTEventEmitter <RCTBridgeModule>
-
+@interface RNAugmentPlayerSDK : RCTEventEmitter <RCTBridgeModule>
 @property (class, readonly) AGTAugmentSDK* augmentSDK;
 
 - (void) init:(NSDictionary*) data;
 - (void) isARKitAvailable:(RCTResponseSenderBlock) callback;
 - (void) checkIfModelDoesExistForUserProduct: (NSDictionary*) product resolver: (RCTPromiseResolveBlock) resolver rejecter:(RCTPromiseRejectBlock) rejecter;
-
 @end

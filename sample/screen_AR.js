@@ -4,7 +4,7 @@
  */
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text, Button, NativeEventEmitter, NativeModules } from 'react-native';
-import { AugmentReact, AugmentReactPlayer } from 'react-native-augment';
+import { AugmentPlayerSDK, AugmentPlayer } from 'react-native-augment';
 import Toast, {DURATION} from 'react-native-easy-toast'
 
 var productToSearch
@@ -18,80 +18,6 @@ export default class AugmentReactExample extends Component {
             loaderText: "Loading ...",
             loaderShow: true
         };
-        this.augmentPlayer = React.createRef();
-    }
-
-    componentWillMount() {
-        const { AugmentReactPlayerTrackingStatusEmitter, AugmentReactPlayerModelGestureEmitter } = NativeModules;
-        this.trackingStatusEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerTrackingStatusEmitter);
-        this.modelGestureEmitter = new NativeEventEmitter(NativeModules.AugmentReactPlayerModelGestureEmitter);
-
-        AugmentReact.isARKitAvailable((_, isAvailable) => {
-          console.log('isARKitAvailable=' + isAvailable);
-        })
-
-        this.subscriptions = [
-            // Connect to each tracking status event individually
-            this.trackingStatusEmitter.addListener('Error',(data) => {
-              this.refs.toast.show('Error');
-                console.log('An error occured during tracking: ' + data);
-            }),
-            this.trackingStatusEmitter.addListener('FeaturesDetected',() => {
-              this.refs.toast.show('FeaturesDetected');
-                console.log('Tracking state changed to FeaturesDetected');
-            }),
-            this.trackingStatusEmitter.addListener('Initializing',() => {
-              this.refs.toast.show('Initializing', DURATION.FOREVER);
-                console.log('Tracking state changed to Initializing');
-            }),
-            this.trackingStatusEmitter.addListener('LimitedExcessiveMotion',() => {
-              this.refs.toast.show('LimitedExcessiveMotion');
-                console.log('Tracking state changed to LimitedExcessiveMotion');
-            }),
-            this.trackingStatusEmitter.addListener('LimitedInsufficientFeatures',() => {
-              this.refs.toast.show('LimitedInsufficientFeatures');
-                console.log('Tracking state changed to LimitedInsufficientFeatures');
-            }),
-            this.trackingStatusEmitter.addListener('LimitedRelocalizing',() => {
-              this.refs.toast.show('LimitedRelocalizing');
-                console.log('Tracking state changed to LimitedRelocalizing');
-            }),
-            this.trackingStatusEmitter.addListener('Normal',() => {
-              this.refs.toast.show('Normal');
-                console.log('Tracking state changed to Normal');
-            }),
-            this.trackingStatusEmitter.addListener('NotAvailable',() => {
-              this.refs.toast.show('NotAvailable');
-                console.log('Tracking state changed to NotAvailable');
-            }),
-            this.trackingStatusEmitter.addListener('PlaneDetected',() => {
-              this.refs.toast.show('PlaneDetected');
-                console.log('Tracking state changed to PlaneDetected');
-            }),
-            this.trackingStatusEmitter.addListener('TrackerDetected',() => {
-              this.refs.toast.show('TrackerDetected');
-                console.log('Tracking state changed to TrackerDetected');
-            }),
-            // Connect to each gesture event individually
-            this.modelGestureEmitter.addListener('ModelAdded',(model3DUuid) => {
-              this.refs.toast.show('ModelAdded');
-                console.log('Model added with uuid ' + model3DUuid);
-            }),
-            this.modelGestureEmitter.addListener('ModelTranslated',(model3DUuid) => {
-              this.refs.toast.show('ModelTranslated');
-                console.log('Model translated with uuid ' + model3DUuid);
-            }),
-            this.modelGestureEmitter.addListener('ModelRotated',(model3DUuid) => {
-              this.refs.toast.show('ModelRotated');
-                console.log('Model rotated with uuid ' + model3DUuid);
-            }),
-        ]
-    }
-
-    componentWillUnmount() {
-        this.subscriptions.forEach(function(subscription) {
-            subscription.remove();
-        });
     }
 
     render() {
@@ -105,9 +31,10 @@ export default class AugmentReactExample extends Component {
 
         return (
             <View style={styles.container} pointerEvents={'none','box-none'}>
-                <AugmentReactPlayer style={styles.augmentPlayer}
-                    ref={this.augmentPlayer}
+                <AugmentPlayer style={styles.augmentPlayer}
+                    ref={ref => { this.augmentPlayer = ref; }}
                     onPlayerReady={this.business.bind(this)}
+                    onInitializationFailed={this.error.bind(this)}
                     loaderCallback={this.loader.bind(this)}
                 />
                 <View style={styles.loaderContainer} pointerEvents={'none','box-none'}>
@@ -129,14 +56,14 @@ export default class AugmentReactExample extends Component {
     }
 
     loader(loaderStatus) {
-        // Product and AR general loading
-        // This is here to allow you to give feedback to your user
-        // {progress: int, show: bool}
-        console.log(loaderStatus);
         this.setState({
             loaderShow: loaderStatus.show,
             loaderText: "Loading " + loaderStatus.progress + "%"
         });
+    }
+
+    error() {
+        console.log("error");
     }
 
     business(player, error) {
@@ -145,18 +72,15 @@ export default class AugmentReactExample extends Component {
             return;
         }
 
-        AugmentReact.checkIfModelDoesExistForUserProduct(productToSearch)
+        AugmentPlayerSDK.checkIfModelDoesExistForUserProduct(productToSearch)
         .then((product) => {
-          console.log(player);
-          console.log(AugmentReact);
-          console.log(AugmentReactPlayer);
           player.addProduct(product)
-          // .then(() => {
-          //     console.log("The product has been added to the ARView");
-          // })
-          // .catch((error) => {
-          //     console.error(error);
-          // });
+          .then(() => {
+              console.log("The product has been added to the ARView");
+          })
+          .catch((error) => {
+              console.error(error);
+          });
         })
         .catch((error) => {
             console.error(error);
