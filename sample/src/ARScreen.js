@@ -26,6 +26,8 @@ export default class ARScreen extends React.Component {
                     onPlayerReady={this.business.bind(this)}
                     onInitializationFailed={this.error.bind(this)}
                     loaderCallback={this.loader.bind(this)}
+                    onTrackingStatusChanged={this.onTrackingStatusChanged.bind(this)}
+                    onModelGesture={this.onModelGesture.bind(this)}
                 />
                 <View style={styles.loaderContainer} pointerEvents={'none','box-none'}>
                     <Text style={[styles.loader, {display: displayMode}]}>
@@ -57,7 +59,6 @@ export default class ARScreen extends React.Component {
     }
 
     business(player, error) {
-        console.log('ready');
         if (error) {
             console.error(error);
             return;
@@ -65,7 +66,7 @@ export default class ARScreen extends React.Component {
 
         const { params } = this.props.navigation.state;
         productToSearch = params.productToSearch
-        
+
         AugmentPlayerSDK.checkIfModelDoesExistForUserProduct(productToSearch)
         .then((product) => {
           player.addProduct(product)
@@ -97,6 +98,57 @@ export default class ARScreen extends React.Component {
         .catch((error) => {
             console.error(error);
         });
+    }
+
+    onTrackingStatusChanged = ({ status, message }) => {
+      switch (status) {
+        case AugmentPlayer.Constants.TrackingStatus.error:
+          console.log('An error occured during tracking: ' + data);
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.featuresDetected:
+          console.log('Tracking state changed to FeaturesDetected');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.initializing:
+          console.log('Tracking state changed to Initializing');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.limitedExcessiveMotion:
+          console.log('Tracking state changed to LimitedExcessiveMotion');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.limitedInsufficientFeatures:
+          console.log('Tracking state changed to LimitedInsufficientFeatures');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.limitedRelocalizing:
+          console.log('Tracking state changed to LimitedRelocalizing');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.normal:
+          console.log('Tracking state changed to Normal');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.notAvailable:
+          console.log('Tracking state changed to NotAvailable');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.planeDetected:
+          console.log('Tracking state changed to PlaneDetected');
+          break;
+        case AugmentPlayer.Constants.TrackingStatus.trackerDetected:
+          console.log('Tracking state changed to TrackerDetected');
+          break;
+        default:
+          console.log("onTrackingStatusChanged" + status)
+      }
+    }
+
+    onModelGesture = (event) => {
+      switch (event.gesture) {
+        case AugmentPlayer.Constants.ModelGesture.added:
+          console.log('Model with uuid ' + event.model_uuid + " has been placed");
+          break;
+        case AugmentPlayer.Constants.ModelGesture.translated:
+          console.log('Model with uuid ' + event.model_uuid + " has been translated");
+          break;
+        case AugmentPlayer.Constants.ModelGesture.rotated:
+          console.log('Model with uuid ' + event.model_uuid + " has been rotated");
+          break;
+      }
     }
 }
 
