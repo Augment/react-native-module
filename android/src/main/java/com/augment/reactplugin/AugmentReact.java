@@ -1,28 +1,20 @@
 package com.augment.reactplugin;
 
-import android.app.Activity;
-import android.opengl.GLSurfaceView;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
-public class AugmentReact extends ReactContextBaseJavaModule implements LifecycleEventListener {
+public class AugmentReact extends ReactContextBaseJavaModule {
+
+    static final String REACT_CLASS = "AugmentReact";
 
     public AugmentReact(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -93,5 +85,4 @@ public class AugmentReact extends ReactContextBaseJavaModule implements Lifecycl
     public void takeScreenshot(@NonNull final Promise promise){
         promise.reject(new Exception("Error: SDK is not available on Android."));
     }
-
 }
