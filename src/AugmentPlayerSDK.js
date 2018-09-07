@@ -28,7 +28,7 @@ var RNAugmentPlayerSDK = NativeModules.RNAugmentPlayerSDK
 * Extended version of the Player
 * That way we can enforce specifics behaviours
 */
-export default class AugmentSDK {
+export default class AugmentPlayerSDK {
   static Constants = {
     AppID: RNAugmentPlayerSDK.AppID,
     AppKey: RNAugmentPlayerSDK.AppKey,

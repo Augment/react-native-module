@@ -7,10 +7,7 @@ import { AppRegistry, StyleSheet, View, Text, Button, NativeEventEmitter, Native
 import { AugmentPlayerSDK, AugmentPlayer } from 'react-native-augment';
 import Toast, {DURATION} from 'react-native-easy-toast'
 
-var productToSearch
-var toog = false
-
-export default class AugmentReactExample extends Component {
+export default class ARScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -21,14 +18,7 @@ export default class AugmentReactExample extends Component {
     }
 
     render() {
-        const { params } = this.props.navigation.state;
-        productToSearch = params ? params.productToSearch : {
-          identifier: "4",
-          brand: "Apple",
-          name: "Ipad"
-                                                            };
         let displayMode = this.state.loaderShow ? "flex" : "none";
-
         return (
             <View style={styles.container} pointerEvents={'none','box-none'}>
                 <AugmentPlayer style={styles.augmentPlayer}
@@ -71,6 +61,9 @@ export default class AugmentReactExample extends Component {
             console.error(error);
             return;
         }
+
+        const { params } = this.props.navigation.state;
+        productToSearch = params.productToSearch
 
         AugmentPlayerSDK.checkIfModelDoesExistForUserProduct(productToSearch)
         .then((product) => {
@@ -142,6 +135,3 @@ const styles = StyleSheet.create({
         backgroundColor: "skyblue"
     }
 });
-
-// Rename this regarding your project name
-AppRegistry.registerComponent('AugmentReactExample', () => AugmentReactExample);
