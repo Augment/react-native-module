@@ -38,9 +38,24 @@ export default class AugmentPlayerSDK {
     EAN: RNAugmentPlayerSDK.EAN,
   };
 
-  static isARKitAvailable(): Promise<Array<FaceFeature>> {
+  static init({id, key}): Promise {
+      RNAugmentPlayerSDK.init({
+        id:  id,
+        key: key
+      });
+  }
+
+  static async checkIfModelDoesExistForUserProduct(productToSearch): Promise {
+      return await RNAugmentPlayerSDK.checkIfModelDoesExistForUserProduct(productToSearch)
+  }
+
+  static isARKitAvailable(): Promise<Boolean> {
     if (Platform.OS === 'ios') {
-      return RNAugmentPlayerSDK.isARKitAvailable()
+      return new Promise(resolve => {
+        RNAugmentPlayerSDK.isARKitAvailable((isAvailable) => {
+          resolve(isAvailable);
+        })
+      });
     } else {
       return new Promise(resolve => { resolve(false); });
     }

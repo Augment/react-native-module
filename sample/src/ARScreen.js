@@ -7,7 +7,7 @@ import { AppRegistry, StyleSheet, View, Text, Button, NativeEventEmitter, Native
 import { AugmentPlayerSDK, AugmentPlayer } from 'react-native-augment';
 import Toast, {DURATION} from 'react-native-easy-toast'
 
-export default class ARScreen extends Component {
+export default class ARScreen extends React.Component {
 
     constructor(props) {
         super(props);
@@ -57,6 +57,7 @@ export default class ARScreen extends Component {
     }
 
     business(player, error) {
+        console.log('ready');
         if (error) {
             console.error(error);
             return;
@@ -64,7 +65,7 @@ export default class ARScreen extends Component {
 
         const { params } = this.props.navigation.state;
         productToSearch = params.productToSearch
-
+        
         AugmentPlayerSDK.checkIfModelDoesExistForUserProduct(productToSearch)
         .then((product) => {
           player.addProduct(product)

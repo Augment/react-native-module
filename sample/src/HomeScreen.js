@@ -1,9 +1,9 @@
-import { Component } from 'react';
+import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { YellowBox } from 'react-native';
 
-class HomeScreen extends Component {
+export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: 'center' }}>

@@ -15,3 +15,5 @@ const RootStack = StackNavigator(
     initialRouteName: 'Home',
   }
 );
+
+export default RootStack;

@@ -14,7 +14,7 @@ const RNAugmentPlayerManager = NativeModules.RNAugmentPlayerManager
 * Extended version of the Player
 * That way we can enforce specifics behaviours
 */
-class AugmentPlayer extends React.Component<PropsType, StateType> {
+export default class AugmentPlayer extends React.Component<PropsType, StateType> {
   static Constants = {
     ModelGesture: RNAugmentPlayerManager.ModelGesture,
     TrackingStatus: RNAugmentPlayerManager.TrackingStatus
@@ -61,13 +61,13 @@ class AugmentPlayer extends React.Component<PropsType, StateType> {
   };
 
   _onPlayerReady = () => {
-    if (!this.props.onPlayerReady) {
+    if (this.props.onPlayerReady) {
       this.props.onPlayerReady(this);
     }
   }
 
   _onInitializationFailed = () => {
-    if (!this.props.onInitializationFailed) {
+    if (this.props.onInitializationFailed) {
       this.props.onInitializationFailed(this);
     }
   }
