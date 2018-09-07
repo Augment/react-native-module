@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Using iOS SDK v4.0, removing the dependency on Vuforia
+
+### Removed
+- Android SDK has been removed temporarily and all possible calls to `AugmentPlayerSDK` and `AugmentPlayer` have been stubbed. 
+
+### Breaking changes
+- `AugmentReact` and `AugmentReactPlayer` have been renamed `AugmentPlayerSDK` and `AugmentPlayer` to match native names.
+- Native listeners (gesture and tracking) have been removed in favor of component props
+- `addProduct`, `takeScreenshot` and `recenterProducts` have moved to AugmentPlayer component
+instead of being global functions.
+
 ## [1.5.1] - 2018-08-09
 ### Added
 - iOS: Expose isARKitAvailable
