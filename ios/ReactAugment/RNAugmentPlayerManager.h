@@ -6,7 +6,6 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTViewManager.h>
-#import "AugmentReactPlayerView.h"
 
-@interface ReactAugmentViewManager : RCTViewManager <AugmentReactPlayerViewDelegate>
+@interface RNAugmentPlayerManager : RCTViewManager
 @end
