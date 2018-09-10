@@ -27,9 +27,9 @@
 		48DFDA7620E6664200871BC6 /* EmptyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DFDA7520E6664200871BC6 /* EmptyFile.swift */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		A2B076E209AD4A6B9A712D92 /* libReactAugment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5609FDD4BB4A4E4CA5D2A3DB /* libReactAugment.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		ADF799418CBB5991E02B418E /* Pods_sample_menu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603CC606AE296869BC3C2D4 /* Pods_sample_menu.framework */; };
+		F48D8C6D2142A7BB001D20C1 /* libReactAugment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F48D8C242141F0AA001D20C1 /* libReactAugment.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,13 +264,6 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
-		4872AEB1209745EA006BFAB0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 73280F4A137B441F84D5B2FA /* ReactAugment.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02A578401EB38DC2001562F1;
-			remoteInfo = ReactAugment;
-		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -306,6 +299,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		F48D8C232141F0AA001D20C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D01B48C8DAB049C7A7845CB1 /* ReactAugment.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02A578401EB38DC2001562F1;
+			remoteInfo = ReactAugment;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -334,13 +334,12 @@
 		48DFDA4A20E664F100871BC6 /* AugmentPlayerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AugmentPlayerSDK.framework; path = Pods/AugmentPlayerSDK/AugmentPlayerSDK.framework; sourceTree = "<group>"; };
 		48DFDA7420E6664200871BC6 /* sample_menu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sample_menu-Bridging-Header.h"; sourceTree = "<group>"; };
 		48DFDA7520E6664200871BC6 /* EmptyFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFile.swift; sourceTree = "<group>"; };
-		5609FDD4BB4A4E4CA5D2A3DB /* libReactAugment.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactAugment.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		73280F4A137B441F84D5B2FA /* ReactAugment.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactAugment.xcodeproj; path = "../node_modules/react-native-augment/ios/ReactAugment.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8FAC6DF66840E9B11C2903EB /* Pods-sample_menu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample_menu.release.xcconfig"; path = "Pods/Target Support Files/Pods-sample_menu/Pods-sample_menu.release.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		D01B48C8DAB049C7A7845CB1 /* ReactAugment.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactAugment.xcodeproj; path = "../node_modules/react-native-augment/ios/ReactAugment.xcodeproj"; sourceTree = "<group>"; };
 		D603CC606AE296869BC3C2D4 /* Pods_sample_menu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sample_menu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB1BB2AAE66EC12C0BEF7ED /* Pods-sample_menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample_menu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sample_menu/Pods-sample_menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -371,7 +370,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				A2B076E209AD4A6B9A712D92 /* libReactAugment.a in Frameworks */,
+				F48D8C6D2142A7BB001D20C1 /* libReactAugment.a in Frameworks */,
 				ADF799418CBB5991E02B418E /* Pods_sample_menu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,22 +505,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4872AE88209745E9006BFAB0 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				5609FDD4BB4A4E4CA5D2A3DB /* libReactAugment.a */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		4872AEAE209745EA006BFAB0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4872AEB2209745EA006BFAB0 /* libReactAugment.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,7 +547,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				73280F4A137B441F84D5B2FA /* ReactAugment.xcodeproj */,
+				D01B48C8DAB049C7A7845CB1 /* ReactAugment.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -589,7 +572,6 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				6E27E32B7B25C378B956A979 /* Pods */,
-				4872AE88209745E9006BFAB0 /* Recovered References */,
 				48DFDA7420E6664200871BC6 /* sample_menu-Bridging-Header.h */,
 			);
 			indentWidth = 2;
@@ -611,6 +593,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F48D8BFB2141F0AA001D20C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F48D8C242141F0AA001D20C1 /* libReactAugment.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -672,7 +662,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = K464NG3UWC;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 940;
 					};
 				};
 			};
@@ -737,8 +727,8 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 4872AEAE209745EA006BFAB0 /* Products */;
-					ProjectRef = 73280F4A137B441F84D5B2FA /* ReactAugment.xcodeproj */;
+					ProductGroup = F48D8BFB2141F0AA001D20C1 /* Products */;
+					ProjectRef = D01B48C8DAB049C7A7845CB1 /* ReactAugment.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -974,13 +964,6 @@
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4872AEB2209745EA006BFAB0 /* libReactAugment.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactAugment.a;
-			remoteRef = 4872AEB1209745EA006BFAB0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1014,6 +997,13 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F48D8C242141F0AA001D20C1 /* libReactAugment.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactAugment.a;
+			remoteRef = F48D8C232141F0AA001D20C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1079,17 +1069,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-sample_menu/Pods-sample_menu-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/AFOAuth2Manager/AFOAuth2Manager.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${PODS_ROOT}/AugmentPlayerSDK/AugmentPlayerSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/AutoCoding/AutoCoding.framework",
+				"${BUILT_PRODUCTS_DIR}/CommonCryptoModule/CommonCryptoModule.framework",
+				"${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFOAuth2Manager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AugmentPlayerSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutoCoding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonCryptoModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTDecode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1153,6 +1147,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-augment/ios/ReactAugment",
+					"$(SRCROOT)//**",
 				);
 				INFOPLIST_FILE = sample_menuTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1180,6 +1175,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-augment/ios/ReactAugment",
+					"$(SRCROOT)//**",
 				);
 				INFOPLIST_FILE = sample_menuTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1206,7 +1202,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = K464NG3UWC;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/AugmentPlayerSDK",
@@ -1214,8 +1209,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-augment/ios/ReactAugment",
+					"$(SRCROOT)//**",
 				);
 				INFOPLIST_FILE = sample_menu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1238,7 +1235,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K464NG3UWC;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/AugmentPlayerSDK",
@@ -1246,8 +1242,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-augment/ios/ReactAugment",
+					"$(SRCROOT)//**",
 				);
 				INFOPLIST_FILE = sample_menu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

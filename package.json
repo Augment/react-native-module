@@ -1,6 +1,6 @@
 {
     "name": "react-native-augment",
-    "version": "1.5.1",
+    "version": "2.0.0",
     "description": "Augment Plugin for the Augment Mobile SDK",
     "homepage": "https://developers.augment.com",
     "bugs": "https://github.com/Augment/react-native-module/issues",
@@ -10,14 +10,14 @@
         "type": "git",
         "url": "https://github.com/Augment/react-native-module.git"
     },
+    "main": "src/index.js",
     "files": [
         "LICENSE",
         "README.md",
         "CHANGELOG.md",
-        "index.js",
+        "src/",
         "android/",
-        "ios/",
-        "augment-data/"
+        "ios/"
     ],
     "keywords": [
         "augment",
@@ -33,6 +33,6 @@
     "nativePackage": true,
     "devDependencies": {
         "react": "16.3.1",
-        "react-native": "0.55.3"
+        "react-native": "^0.56.0"
     }
 }
