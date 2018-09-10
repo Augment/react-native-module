@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "^0.56.0",
-    "react-native-augment": "1.5.1",
+    "react-native-augment": "1.6.0",
     "react-native-easy-toast": "^1.1.0",
     "react-navigation": "^1.5.11"
   },
