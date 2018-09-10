@@ -4,12 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.0] - 2018-09-10
 ### Changed
 - Using iOS SDK v4.0, removing the dependency on Vuforia
 
 ### Removed
-- Android SDK has been removed temporarily and all possible calls to `AugmentPlayerSDK` and `AugmentPlayer` have been stubbed. 
+- Android SDK has been removed temporarily and all possible calls to `AugmentPlayerSDK` and `AugmentPlayer` have been stubbed.
 
 ### Breaking changes
 - `AugmentReact` and `AugmentReactPlayer` have been renamed `AugmentPlayerSDK` and `AugmentPlayer` to match native names.
