@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.6.0] - 2018-09-10
+## [2.0.0] - 2018-09-10
 ### Changed
 - Using iOS SDK v4.0, removing the dependency on Vuforia
 
