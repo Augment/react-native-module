@@ -4,6 +4,6 @@ platform :ios, '10.0'
 target 'sample_menu' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
-  pod 'AugmentPlayerSDK', '4.0.3'
+  pod 'AugmentPlayerSDK', '4.0.12'
 
 end

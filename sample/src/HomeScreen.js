@@ -12,7 +12,7 @@ export default class HomeScreen extends React.Component {
           title="Open AR"
           onPress={() => this.props.navigation.navigate('ARScreen', {
               productToSearch: {
-                identifier: "5",
+                identifier: "3",
                 brand: "Apple",
                 name: "Ipad"
               }
