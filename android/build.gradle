@@ -1,15 +1,17 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.+'
+        classpath 'com.android.tools.build:gradle:3.1.4'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -21,6 +23,7 @@ apply plugin: 'com.android.library'
 
 repositories {
     mavenCentral()
+    google()
     maven { url  "https://dl.bintray.com/augment/augment" }
 }
 
