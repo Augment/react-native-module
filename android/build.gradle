@@ -23,25 +23,26 @@ apply plugin: 'com.android.library'
 
 repositories {
     mavenCentral()
+    mavenLocal()
     google()
     maven { url  "https://dl.bintray.com/augment/augment" }
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
+        minSdkVersion 24
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
 }
 
 dependencies {
-    compile "com.facebook.react:react-native:+"
-    compile "com.google.zxing:core:3.2.1"
-    compile "com.drewnoakes:metadata-extractor:2.9.1"
-    compile "com.ar.augment:augment-player-sdk:1.0.3"
+    implementation "com.facebook.react:react-native:+"
+    implementation "com.google.zxing:core:3.2.1"
+    implementation "com.drewnoakes:metadata-extractor:2.9.1"
+    implementation "com.ar.augment:augment-player-sdk:2.0.0-alpha1"
+    // implementation "com.ar.augment:augment-player-sdk:1.0.3"
 }
