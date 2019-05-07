@@ -4,3 +4,10 @@
 ## How to use the module
 
 To install and use this module, please refer to the official [Augment developers documentation](https://developers.augment.com/react-native-sdk)
+
+## iOS
+Version compatibility:
+
+| Xcode | SDK       |
+|-------|-----------|
+| 10.1  | <= 4.0.17 |
