@@ -11,3 +11,4 @@ Version compatibility:
 | Xcode | SDK       |
 |-------|-----------|
 | 10.1  | <= 4.0.17 |
+| 10.2  |   soon    |
