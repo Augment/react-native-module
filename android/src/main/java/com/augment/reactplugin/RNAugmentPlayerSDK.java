@@ -20,23 +20,24 @@ public class RNAugmentPlayerSDK extends ReactContextBaseJavaModule {
         return RNAugmentPlayerSDK.class.getSimpleName();
     }
 
-    //    - (void) init:(NSDictionary*) data;
     @ReactMethod
     public void init(ReadableMap product) {
 
     }
 
-    //- (void) isARKitAvailable:(RCTResponseSenderBlock) callback;
     @ReactMethod
     public void isARKitAvailable(Callback callback) {
         callback.invoke(true);
     }
 
-    //- (void) checkIfModelDoesExistForUserProduct: (NSDictionary*) product
-    // resolver: (RCTPromiseResolveBlock) resolver
-    // rejecter:(RCTPromiseRejectBlock) rejecter;
+    /**
+     * This method corresponds to `AugmentReact.checkIfModelDoesExistForUserProduct`
+     * product is a Map object that represent a product
+     * it has "identifier" "brand" "name" and "ean" keys
+     * This method returns an augmentProduct through the React promise mechanism
+     */
     @ReactMethod
     public void checkIfModelDoesExistForUserProduct(ReadableMap product, Promise promise) {
-        promise.resolve(true);
+        promise.reject("500", "TODO");
     }
 }

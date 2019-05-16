@@ -11,31 +11,34 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 public class RNAugmentPlayer extends AppCompatTextView {
     public RNAugmentPlayer(Context context) {
         super(context);
-        onDidiFinish();
+        setUpListener();
     }
 
     public RNAugmentPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        onDidiFinish();
+        setUpListener();
     }
 
     public RNAugmentPlayer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        onDidiFinish();
+        setUpListener();
     }
 
-    private void onDidiFinish() {
+    /// TEST FOR EVENTS
+    private void setUpListener() {
         setOnClickListener(v -> onReceiveNativeEvent());
     }
 
     public void onReceiveNativeEvent() {
-//        WritableMap event = Arguments.createMap();
-//        event.putString("message", "MyMessage");
-        // event
         ReactContext reactContext = (ReactContext) getContext();
-        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+        RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
+        eventEmitter.receiveEvent(
                 getId(),
                 RNAugmentPlayerEvent.onLoadingDidFinish.toString(),
+                null);
+        eventEmitter.receiveEvent(
+                getId(),
+                RNAugmentPlayerEvent.onPlayerReady.toString(),
                 null);
     }
 }
