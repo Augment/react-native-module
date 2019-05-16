@@ -60,7 +60,7 @@ export default class ARScreen extends React.Component {
 
     business(player, error) {
         if (error) {
-            this.refs.toast.show(error);
+            this.refs.toast.show(error.toString());
             return;
         }
 
@@ -74,18 +74,18 @@ export default class ARScreen extends React.Component {
               console.log("The product has been added to the ARView");
           })
           .catch((error) => {
-              this.refs.toast.show(error);
+              this.refs.toast.show(error.toString());
           });
         })
         .catch((error) => {
-            this.refs.toast.show(error);
+            this.refs.toast.show(error.toString());
         })
     }
 
     centerProduct() {
       this.augmentPlayer.recenterProducts()
       .catch((error) => {
-          this.refs.toast.show(error);
+          this.refs.toast.show(error.toString());
       });
     }
 
@@ -96,7 +96,7 @@ export default class ARScreen extends React.Component {
           alert(`Screenshot saved at ${filePath}`);
         })
         .catch((error) => {
-          this.refs.toast.show(error);
+          this.refs.toast.show(error.toString());
         });
     }
 

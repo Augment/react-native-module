@@ -31,11 +31,11 @@ public class RNAugmentPlayer extends AppCompatTextView {
     public void onReceiveNativeEvent() {
 //        WritableMap event = Arguments.createMap();
 //        event.putString("message", "MyMessage");
+        // event
         ReactContext reactContext = (ReactContext) getContext();
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
                 getId(),
-                "onLoadingDidFinish",
-                null // event
-        );
+                RNAugmentPlayerEvent.onLoadingDidFinish.toString(),
+                null);
     }
 }
