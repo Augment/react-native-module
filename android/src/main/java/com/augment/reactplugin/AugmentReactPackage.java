@@ -6,7 +6,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -17,14 +16,16 @@ public class AugmentReactPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@Nonnull final ReactApplicationContext reactContext) {
         return new ArrayList<NativeModule>() {{
-            add(new AugmentReact(reactContext));
             add(new RNAugmentPlayerSDK(reactContext));
+            add(new RNAugmentPlayerManager());
         }};
     }
 
     @Nonnull
     @Override
     public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        return new ArrayList<ViewManager>() {{
+            add(new RNAugmentPlayerManager());
+        }};
     }
 }

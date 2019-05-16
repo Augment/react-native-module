@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 
 let _RNAugmentPlayer;
 let _RNAugmentPlayerManager;
-if (Platform.OS === 'ios') {
+// if (Platform.OS === 'ios') {
   _RNAugmentPlayer = requireNativeComponent('RNAugmentPlayer', AugmentPlayer, {
     nativeOnly: {
       onPlayerReady: true,
@@ -22,38 +22,38 @@ if (Platform.OS === 'ios') {
       onModelGesture: true
     },
   })
-  _RNAugmentPlayerManager = NativeModules.RNAugmentPlayerManager
-} else {
-  _RNAugmentPlayer = class StubbedRNAugmentPlayer extends React.Component<PropsType, StateType> {
-    render() {
-      if (this.props.onPlayerReady) {
-        this.props.onPlayerReady(this);
-      }
-      return <View {...this.props}/>
-    }
-  }
-  _RNAugmentPlayerManager = {
-    stubbed: true,
-
-    recenterProducts: (handle) => {
-      return new Promise((resolve, reject) => {
-        reject("AugmentPlayerSDK is currently not available");
-      });
-    },
-
-    takeScreenshot: (handle) => {
-      return new Promise((resolve, reject) => {
-        reject("AugmentPlayerSDK is currently not available");
-      });
-    },
-
-    addProduct: (product, handle) => {
-      return new Promise((resolve, reject) => {
-        reject("AugmentPlayerSDK is currently not available");
-      });
-    }
-  }
-}
+  _RNAugmentPlayerManager = NativeModules.RNAugmentPlayer
+// } else {
+//   _RNAugmentPlayer = class StubbedRNAugmentPlayer extends React.Component<PropsType, StateType> {
+//     render() {
+//       if (this.props.onPlayerReady) {
+//         this.props.onPlayerReady(this);
+//       }
+//       return <View {...this.props}/>
+//     }
+//   }
+//   _RNAugmentPlayerManager = {
+//     stubbed: true,
+//
+//     recenterProducts: (handle) => {
+//       return new Promise((resolve, reject) => {
+//         reject("AugmentPlayerSDK is currently not available");
+//       });
+//     },
+//
+//     takeScreenshot: (handle) => {
+//       return new Promise((resolve, reject) => {
+//         reject("AugmentPlayerSDK is currently not available");
+//       });
+//     },
+//
+//     addProduct: (product, handle) => {
+//       return new Promise((resolve, reject) => {
+//         reject("AugmentPlayerSDK is currently not available");
+//       });
+//     }
+//   }
+// }
 
 const RNAugmentPlayer = _RNAugmentPlayer;
 const RNAugmentPlayerManager = _RNAugmentPlayerManager;
