@@ -3,6 +3,7 @@ package com.augment.reactplugin;
 import android.view.ViewGroup;
 
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
@@ -28,10 +29,20 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
         return view;
     }
 
+    public Map getExportedCustomBubblingEventTypeConstants() {
+        return MapBuilder.builder()
+                .put(
+                        "onLoadingDidFinish",
+                        MapBuilder.of(
+                                "phasedRegistrationNames",
+                                MapBuilder.of("bubbled", "onLoadingDidFinish")))
+                .build();
+    }
+
     @Nullable
     @Override
     public Map<String, Object> getConstants() {
-        return new HashMap<String, Object>(){{
+        return new HashMap<String, Object>() {{
             put("ModelGesture", "");
             put("TrackingStatus", "");
         }};

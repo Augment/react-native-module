@@ -31,6 +31,11 @@ repositories {
 android {
     compileSdkVersion 28
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 28
@@ -43,5 +48,5 @@ dependencies {
     implementation "com.facebook.react:react-native:+"
     implementation "com.google.zxing:core:3.2.1"
     implementation "com.drewnoakes:metadata-extractor:2.9.1"
-    implementation "com.ar.augment:augment-player-sdk:2.0.0-alpha1"
+    implementation "com.ar.augment:augment-player-sdk:2.0.0-alpha2"
 }
