@@ -12,12 +12,14 @@ import javax.annotation.Nonnull;
 
 public class AugmentReactPackage implements ReactPackage {
 
+    private RNAugmentPlayerManager rnAugmentPlayerManager = new RNAugmentPlayerManager();
+
     @Nonnull
     @Override
     public List<NativeModule> createNativeModules(@Nonnull final ReactApplicationContext reactContext) {
         return new ArrayList<NativeModule>() {{
             add(new RNAugmentPlayerSDK(reactContext));
-            add(new RNAugmentPlayerManager());
+            add(rnAugmentPlayerManager);
         }};
     }
 
@@ -25,7 +27,7 @@ public class AugmentReactPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
         return new ArrayList<ViewManager>() {{
-            add(new RNAugmentPlayerManager());
+            add(rnAugmentPlayerManager);
         }};
     }
 }
