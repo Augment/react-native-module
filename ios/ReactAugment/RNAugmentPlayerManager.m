@@ -18,7 +18,7 @@
 
 @implementation RNAugmentPlayerManager
 
-RCT_EXPORT_MODULE(RNAugmentPlayerManager)
+RCT_EXPORT_MODULE(RNAugmentPlayer)
 
 RCT_EXPORT_VIEW_PROPERTY(onPlayerReady, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onInitializationFailed, RCTBubblingEventBlock)

@@ -94,8 +94,12 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.2"
+    compileSdkVersion 28    
+
+    compileOptions {
+      sourceCompatibility 1.8
+      targetCompatibility 1.8
+    }
 
     defaultConfig {
         applicationId "com.sample_menu"
