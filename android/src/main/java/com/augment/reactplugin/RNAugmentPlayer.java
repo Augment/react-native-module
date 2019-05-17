@@ -1,14 +1,17 @@
 package com.augment.reactplugin;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
-
-import androidx.appcompat.widget.AppCompatTextView;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
-public class RNAugmentPlayer extends AppCompatTextView {
+public class RNAugmentPlayer extends FrameLayout {
+    private static int generateViewId = View.generateViewId();
+
     public RNAugmentPlayer(Context context) {
         super(context);
         setUpListener();
@@ -26,7 +29,9 @@ public class RNAugmentPlayer extends AppCompatTextView {
 
     /// TEST FOR EVENTS
     private void setUpListener() {
+        setBackgroundColor(Color.TRANSPARENT);
         setOnClickListener(v -> onReceiveNativeEvent());
+        setId(generateViewId);
     }
 
     public void onReceiveNativeEvent() {

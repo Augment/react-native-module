@@ -1,15 +1,18 @@
 package com.augment.reactplugin;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.ar.augment.arplayer.sdk.AugmentPlayerFragment;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,8 +22,11 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
+import kotlin.Unit;
+
+public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
     private RNAugmentPlayer rnAugmentPlayer;
+    private int id = View.generateViewId();
 
     @Nonnull
     @Override
@@ -32,8 +38,32 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
     @Override
     protected RNAugmentPlayer createViewInstance(@Nonnull ThemedReactContext reactContext) {
         rnAugmentPlayer = new RNAugmentPlayer(reactContext);
-        rnAugmentPlayer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        rnAugmentPlayer.setText("Hello AR");
+        rnAugmentPlayer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        final FrameLayout view = new FrameLayout(reactContext);
+        AugmentPlayerFragment fragment = new AugmentPlayerFragment();
+        // Add the fragment into the FrameLayout
+        AppCompatActivity activity = (AppCompatActivity) reactContext.getCurrentActivity();
+
+//        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
+//                .addView(
+//                        new FrameLayout(reactContext) {
+//                            {
+//                                setId(id);
+//                                setLayoutParams(new LayoutParams(
+//                                        LayoutParams.MATCH_PARENT,
+//                                        LayoutParams.MATCH_PARENT));
+//                                setBackgroundColor(Color.CYAN);
+//                            }
+//                        });
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(android.R.id.content, fragment, "My_TAG")
+                .commitNow();
+        // Execute the commit immediately or can use commitNow() instead
+        activity.getSupportFragmentManager().executePendingTransactions();
+        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> Unit.INSTANCE);
+        // This step is needed to in order for ReactNative to render your view
+//        addView(rnAugmentPlayer, fragment.getView(), 0);
         return rnAugmentPlayer;
     }
 
