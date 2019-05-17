@@ -52,11 +52,19 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
     super(props);
   }
 
+  create = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this._playerRef),
+      UIManager.RNAugmentPlayer.Commands.create,
+      [] // No args
+    )
+  }
+
   render() {
     return (
       <RNAugmentPlayer
       {...this.props}
-      ref={this._setReference}
+      ref={this._setReference} style={{flex: 1}}
       onPlayerReady={this._onPlayerReady}
       onInitializationFailed={this._onInitializationFailed}
       onLoadingProgressDidChange={this._handleLoadingProgress}

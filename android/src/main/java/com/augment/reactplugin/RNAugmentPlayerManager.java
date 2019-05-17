@@ -2,14 +2,15 @@ package com.augment.reactplugin;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.ar.augment.arplayer.sdk.AugmentPlayerFragment;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -26,6 +27,7 @@ import javax.annotation.Nullable;
 import kotlin.Unit;
 
 public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
+    private static final int COMMAND_CREATE = 12;
     private RNAugmentPlayer rnAugmentPlayer;
     private int id = View.generateViewId();
 
@@ -41,31 +43,65 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
         rnAugmentPlayer = new RNAugmentPlayer(reactContext);
         rnAugmentPlayer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 //        final FrameLayout view = new FrameLayout(reactContext);
+//        AugmentPlayerFragment fragment = new AugmentPlayerFragment();
+//        // Add the fragment into the FrameLayout
+//        ReactActivity activity = (ReactActivity) reactContext.getCurrentActivity();
+////        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
+////                .addView(rnAugmentPlayer);
+//        activity.getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(fragment, "My_TAG")
+//                .commitNow();
+//        // Execute the commit immediately or can use commitNow() instead
+//        activity.getSupportFragmentManager().executePendingTransactions();
+        // This step is needed to in order for ReactNative to render your view
+//        View view = fragment.getView();
+//        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        TextView tv = new TextView(reactContext);
+//        tv.setText("ESDCFVGBHNHRDCFGVBH");
+//        rnAugmentPlayer.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        rnAugmentPlayer.addView(tv);
+//        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> Unit.INSTANCE);
+        return rnAugmentPlayer;
+    }
+
+    @Nullable
+    @Override
+    public Map<String, Integer> getCommandsMap() {
+        return MapBuilder.of(
+                "create", COMMAND_CREATE
+        );
+    }
+
+    @Override
+    public void receiveCommand(@Nonnull RNAugmentPlayer root, int commandId, @Nullable ReadableArray args) {
+        switch (commandId) {
+            case COMMAND_CREATE:
+                createFragment((ReactContext) root.getContext());
+                break;
+        }
+    }
+
+    private void createFragment(ReactContext context) {
+//        MapFragment mapFragment = new MapFragment();
+//        mContext.getCurrentActivity()
+//                .getFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.container, mapFragment)
+//                .commit();
         AugmentPlayerFragment fragment = new AugmentPlayerFragment();
         // Add the fragment into the FrameLayout
-        ReactActivity activity = (ReactActivity) reactContext.getCurrentActivity();
+        ReactActivity activity = (ReactActivity) context.getCurrentActivity();
 //        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
 //                .addView(rnAugmentPlayer);
         activity.getSupportFragmentManager()
                 .beginTransaction()
                 .add(fragment, "My_TAG")
                 .commitNow();
-        // Execute the commit immediately or can use commitNow() instead
-        activity.getSupportFragmentManager().executePendingTransactions();
-        // This step is needed to in order for ReactNative to render your view
-        View view = fragment.getView();
-        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        TextView tv = new TextView(reactContext);
-        tv.setText("ESDCFVGBHNHRDCFGVBH");
-        rnAugmentPlayer.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        rnAugmentPlayer.addView(tv);
+        rnAugmentPlayer.addView(fragment.getView(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         fragment.getAugmentPlayer().getViews().createLiveViewer(() -> Unit.INSTANCE);
-        return rnAugmentPlayer;
-    }
-
-    @Override
-    public void onDropViewInstance(@Nonnull RNAugmentPlayer view) {
-        view.removeAllViews();
+        // Execute the commit immediately or can use commitNow() instead
+//        activity.getSupportFragmentManager().executePendingTransactions();
     }
 
     /**
