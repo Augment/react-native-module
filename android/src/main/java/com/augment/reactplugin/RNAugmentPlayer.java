@@ -1,7 +1,6 @@
 package com.augment.reactplugin;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,7 +9,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 public class RNAugmentPlayer extends FrameLayout {
-    private static int generateViewId = View.generateViewId();
+    public static int generateViewId = View.generateViewId();
 
     public RNAugmentPlayer(Context context) {
         super(context);
@@ -29,7 +28,7 @@ public class RNAugmentPlayer extends FrameLayout {
 
     /// TEST FOR EVENTS
     private void setUpListener() {
-        setBackgroundColor(Color.TRANSPARENT);
+//        setBackgroundColor(Color.TRANSPARENT);
         setOnClickListener(v -> onReceiveNativeEvent());
         setId(generateViewId);
     }
