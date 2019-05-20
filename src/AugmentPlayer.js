@@ -64,7 +64,7 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
     return (
       <RNAugmentPlayer
       {...this.props}
-      ref={this._setReference} style={{flex: 1}}
+      ref={this._setReference}
       onPlayerReady={this._onPlayerReady}
       onInitializationFailed={this._onInitializationFailed}
       onLoadingProgressDidChange={this._handleLoadingProgress}

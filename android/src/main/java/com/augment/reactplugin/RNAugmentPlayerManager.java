@@ -2,6 +2,7 @@ package com.augment.reactplugin;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
@@ -13,8 +14,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +27,7 @@ import javax.annotation.Nullable;
 
 import kotlin.Unit;
 
-public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
+public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
     private static final int COMMAND_CREATE = 12;
     private RNAugmentPlayer rnAugmentPlayer;
     private int id = View.generateViewId();
@@ -37,11 +38,16 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
         return "RNAugmentPlayer";
     }
 
+    @Override
+    public boolean needsCustomLayoutForChildren() {
+        return true;
+    }
+
     @Nonnull
     @Override
     protected RNAugmentPlayer createViewInstance(@Nonnull ThemedReactContext reactContext) {
         rnAugmentPlayer = new RNAugmentPlayer(reactContext);
-        rnAugmentPlayer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        rnAugmentPlayer.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
 //        final FrameLayout view = new FrameLayout(reactContext);
 //        AugmentPlayerFragment fragment = new AugmentPlayerFragment();
 //        // Add the fragment into the FrameLayout
@@ -59,8 +65,8 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
 //        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 //        TextView tv = new TextView(reactContext);
 //        tv.setText("ESDCFVGBHNHRDCFGVBH");
-//        rnAugmentPlayer.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 //        rnAugmentPlayer.addView(tv);
+//        rnAugmentPlayer.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 //        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> Unit.INSTANCE);
         return rnAugmentPlayer;
     }
@@ -83,25 +89,44 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
     }
 
     private void createFragment(ReactContext context) {
-//        MapFragment mapFragment = new MapFragment();
-//        mContext.getCurrentActivity()
-//                .getFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.container, mapFragment)
-//                .commit();
         AugmentPlayerFragment fragment = new AugmentPlayerFragment();
-        // Add the fragment into the FrameLayout
+//        // Add the fragment into the FrameLayout
         ReactActivity activity = (ReactActivity) context.getCurrentActivity();
-//        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
-//                .addView(rnAugmentPlayer);
+////        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
+////                .addView(rnAugmentPlayer);
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .add(fragment, "My_TAG")
+                .add(fragment, "MY_TAG")
                 .commitNow();
-        rnAugmentPlayer.addView(fragment.getView(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> Unit.INSTANCE);
-        // Execute the commit immediately or can use commitNow() instead
+//        ViewGroup.LayoutParams p = fragment.getView().getLayoutParams();
+//        p.height = 500;
+//        p.width = 500;
+//        fragment.getView().setLayoutParams(new ViewGroup.LayoutParams(500, 500));
+
 //        activity.getSupportFragmentManager().executePendingTransactions();
+//        rnAugmentPlayer.addView(fragment.getView(), FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        
+        rnAugmentPlayer.addView(fragment.getView());
+        rnAugmentPlayer.bringToFront();
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                fragment.getAugmentPlayer().getViews().createLiveViewer(() -> {
+                    ViewGroup view = (ViewGroup) fragment.getView();
+                    for (int i = 0; i < view.getChildCount(); i++) {
+                        View child = view.getChildAt(i);
+                        child.measure(
+                                View.MeasureSpec.makeMeasureSpec(rnAugmentPlayer.getMeasuredWidth(), View.MeasureSpec.EXACTLY),
+                                View.MeasureSpec.makeMeasureSpec(rnAugmentPlayer.getMeasuredHeight(), View.MeasureSpec.EXACTLY));
+                        child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
+                    }
+                    return Unit.INSTANCE;
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 
     /**
