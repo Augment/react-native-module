@@ -111,52 +111,45 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
 //        activity.getSupportFragmentManager().executePendingTransactions();
 //        rnAugmentPlayer.addView(fragment.getView(), FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
 
-        rnAugmentPlayer.addView(fragment.getView(),0);
-        new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-                fragment.getAugmentPlayer().getViews().createLiveViewer(() -> {
-                    fragment.getAugmentPlayer().getContent().add(new Model3D("",
-                                    "",
-                                    new ComputedDimension(0.0, 0.0, 0.0, 0.0, ""),
-                                    "",
-                                    "",
-                                    new DisplayConfiguration(),
-                                    false,
-                                    false,
-                                    new Thumbnail("", 0, 0),
-                                    new Thumbnail("", 0, 0),
-                                    new Model3DFile("", "", ""),
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    new Thumbnail("", 0, 0),
-                                    "",
-                                    "",
-                                    "66b4630e-688f-49e0-a0b9-a3f23443f4f1",
-                                    "",
-                                    "")
+        rnAugmentPlayer.addView(fragment.getView(), 0);
 
-                            , (model3DInstance, error) -> Unit.INSTANCE);
-                    ViewGroup view = (ViewGroup) fragment.getView();
-                    for (int i = 0; i < view.getChildCount(); i++) {
-                        View child = view.getChildAt(i);
-                        child.measure(
-                                View.MeasureSpec.makeMeasureSpec(rnAugmentPlayer.getMeasuredWidth(), View.MeasureSpec.EXACTLY),
-                                View.MeasureSpec.makeMeasureSpec(rnAugmentPlayer.getMeasuredHeight(), View.MeasureSpec.EXACTLY));
-                        child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-                    }
-                    return Unit.INSTANCE;
-                });
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> {
+            fragment.getAugmentPlayer().getContent().add(new Model3D("",
+                            "",
+                            new ComputedDimension(0.0, 0.0, 0.0, 0.0, ""),
+                            "",
+                            "",
+                            new DisplayConfiguration(),
+                            false,
+                            false,
+                            new Thumbnail("", 0, 0),
+                            new Thumbnail("", 0, 0),
+                            new Model3DFile("", "", ""),
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            new Thumbnail("", 0, 0),
+                            "",
+                            "",
+                            "66b4630e-688f-49e0-a0b9-a3f23443f4f1",
+                            "",
+                            "")
+
+                    , (model3DInstance, error) -> Unit.INSTANCE);
+            ViewGroup view = (ViewGroup) fragment.getView();
+            for (int i = 0; i < view.getChildCount(); i++) {
+                View child = view.getChildAt(i);
+                child.measure(
+                        View.MeasureSpec.makeMeasureSpec(rnAugmentPlayer.getMeasuredWidth(), View.MeasureSpec.EXACTLY),
+                        View.MeasureSpec.makeMeasureSpec(rnAugmentPlayer.getMeasuredHeight(), View.MeasureSpec.EXACTLY));
+                child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
             }
-        }).start();
-
+            return Unit.INSTANCE;
+        });
     }
 
     /**
