@@ -6,6 +6,11 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
+import com.ar.augment.arplayer.model.ComputedDimension;
+import com.ar.augment.arplayer.model.DisplayConfiguration;
+import com.ar.augment.arplayer.model.Model3D;
+import com.ar.augment.arplayer.model.Model3DFile;
+import com.ar.augment.arplayer.model.Thumbnail;
 import com.ar.augment.arplayer.sdk.AugmentPlayerFragment;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.Promise;
@@ -105,13 +110,38 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
 
 //        activity.getSupportFragmentManager().executePendingTransactions();
 //        rnAugmentPlayer.addView(fragment.getView(), FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-        
-        rnAugmentPlayer.addView(fragment.getView());
-        rnAugmentPlayer.bringToFront();
+
+        rnAugmentPlayer.addView(fragment.getView(),0);
         new Thread(() -> {
             try {
                 Thread.sleep(5000);
                 fragment.getAugmentPlayer().getViews().createLiveViewer(() -> {
+                    fragment.getAugmentPlayer().getContent().add(new Model3D("",
+                                    "",
+                                    new ComputedDimension(0.0, 0.0, 0.0, 0.0, ""),
+                                    "",
+                                    "",
+                                    new DisplayConfiguration(),
+                                    false,
+                                    false,
+                                    new Thumbnail("", 0, 0),
+                                    new Thumbnail("", 0, 0),
+                                    new Model3DFile("", "", ""),
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    new Thumbnail("", 0, 0),
+                                    "",
+                                    "",
+                                    "66b4630e-688f-49e0-a0b9-a3f23443f4f1",
+                                    "",
+                                    "")
+
+                            , (model3DInstance, error) -> Unit.INSTANCE);
                     ViewGroup view = (ViewGroup) fragment.getView();
                     for (int i = 0; i < view.getChildCount(); i++) {
                         View child = view.getChildAt(i);
