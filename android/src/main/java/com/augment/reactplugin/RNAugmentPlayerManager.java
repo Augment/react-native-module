@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import com.ar.augment.arplayer.model.ComputedDimension;
 import com.ar.augment.arplayer.model.DisplayConfiguration;
@@ -53,27 +54,23 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
     protected RNAugmentPlayer createViewInstance(@Nonnull ThemedReactContext reactContext) {
         rnAugmentPlayer = new RNAugmentPlayer(reactContext);
         rnAugmentPlayer.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-//        final FrameLayout view = new FrameLayout(reactContext);
-//        AugmentPlayerFragment fragment = new AugmentPlayerFragment();
-//        // Add the fragment into the FrameLayout
-//        ReactActivity activity = (ReactActivity) reactContext.getCurrentActivity();
-////        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
-////                .addView(rnAugmentPlayer);
-//        activity.getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(fragment, "My_TAG")
-//                .commitNow();
-//        // Execute the commit immediately or can use commitNow() instead
-//        activity.getSupportFragmentManager().executePendingTransactions();
-        // This step is needed to in order for ReactNative to render your view
-//        View view = fragment.getView();
-//        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        TextView tv = new TextView(reactContext);
-//        tv.setText("ESDCFVGBHNHRDCFGVBH");
-//        rnAugmentPlayer.addView(tv);
-//        rnAugmentPlayer.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> Unit.INSTANCE);
         return rnAugmentPlayer;
+    }
+
+    @Override
+    public void onDropViewInstance(@Nonnull RNAugmentPlayer view) {
+        super.onDropViewInstance(view);
+        ReactActivity activity = (ReactActivity) ((ReactContext) view.getContext()).getCurrentActivity();
+        FragmentManager supportFragmentManager = activity.getSupportFragmentManager();
+        view.removeAllViews();
+
+        AugmentPlayerFragment fragment = (AugmentPlayerFragment) supportFragmentManager.findFragmentByTag("MY_TAG");
+        fragment.getAugmentPlayer().getViews().destroyCurrentViewer();
+        supportFragmentManager
+                .beginTransaction()
+                .detach(fragment)
+                .remove(fragment)
+                .commit();
     }
 
     @Nullable
