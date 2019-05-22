@@ -53,6 +53,7 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
   }
 
   componentDidMount() {
+    if (Platform.OS === 'android')
       this._create();
   }
 
