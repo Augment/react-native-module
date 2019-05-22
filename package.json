@@ -32,7 +32,7 @@
     ],
     "nativePackage": true,
     "devDependencies": {
-        "react": "16.8.6",
+        "react": "16.8.3",
         "react-native": "0.59.5"
     }
 }
