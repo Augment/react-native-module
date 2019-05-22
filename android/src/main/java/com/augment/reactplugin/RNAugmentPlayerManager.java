@@ -35,8 +35,8 @@ import kotlin.Unit;
 
 public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
     private static final int COMMAND_CREATE = 12;
+    private static final String AUGMENT_FRAGMENT_TAG = "AUGMENT_FRAGMENT_TAG";
     private RNAugmentPlayer rnAugmentPlayer;
-    private int id = View.generateViewId();
 
     @Nonnull
     @Override
@@ -64,7 +64,7 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
         FragmentManager supportFragmentManager = activity.getSupportFragmentManager();
         view.removeAllViews();
 
-        AugmentPlayerFragment fragment = (AugmentPlayerFragment) supportFragmentManager.findFragmentByTag("MY_TAG");
+        AugmentPlayerFragment fragment = (AugmentPlayerFragment) supportFragmentManager.findFragmentByTag(AUGMENT_FRAGMENT_TAG);
         fragment.getAugmentPlayer().getViews().destroyCurrentViewer();
         supportFragmentManager
                 .beginTransaction()
@@ -92,24 +92,12 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
 
     private void createFragment(ReactContext context) {
         AugmentPlayerFragment fragment = new AugmentPlayerFragment();
-//        // Add the fragment into the FrameLayout
         ReactActivity activity = (ReactActivity) context.getCurrentActivity();
-////        activity.getWindow().getDecorView().<ViewGroup>findViewById(android.R.id.content)
-////                .addView(rnAugmentPlayer);
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .add(fragment, "MY_TAG")
+                .add(fragment, AUGMENT_FRAGMENT_TAG)
                 .commitNow();
-//        ViewGroup.LayoutParams p = fragment.getView().getLayoutParams();
-//        p.height = 500;
-//        p.width = 500;
-//        fragment.getView().setLayoutParams(new ViewGroup.LayoutParams(500, 500));
-
-//        activity.getSupportFragmentManager().executePendingTransactions();
-//        rnAugmentPlayer.addView(fragment.getView(), FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-
         rnAugmentPlayer.addView(fragment.getView(), 0);
-
         fragment.getAugmentPlayer().getViews().createLiveViewer(() -> {
             fragment.getAugmentPlayer().getContent().add(new Model3D("",
                             "",

@@ -17,10 +17,6 @@ export default class ARScreen extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.augmentPlayer.create();
-    }
-
     render() {
         let displayMode = this.state.loaderShow ? "flex" : "none";
         return (

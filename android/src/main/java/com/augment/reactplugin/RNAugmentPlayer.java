@@ -28,7 +28,6 @@ public class RNAugmentPlayer extends FrameLayout {
 
     /// TEST FOR EVENTS
     private void setUpListener() {
-//        setBackgroundColor(Color.TRANSPARENT);
         setOnClickListener(v -> onReceiveNativeEvent());
         setId(generateViewId);
     }

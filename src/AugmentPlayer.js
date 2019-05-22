@@ -52,7 +52,11 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
     super(props);
   }
 
-  create = () => {
+  componentDidMount() {
+      this._create();
+  }
+
+  _create = () => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this._playerRef),
       UIManager.getViewManagerConfig('RNAugmentPlayer').Commands.create,
