@@ -12,10 +12,13 @@ import com.ar.augment.arplayer.model.Product;
 import com.ar.augment.arplayer.sdk.AugmentPlayer;
 import com.ar.augment.arplayer.sdk.AugmentPlayerFragment;
 import com.ar.augment.arplayer.sdk.AugmentSDK;
+import com.ar.augment.arplayer.sdk.TrackingStatus;
 import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import kotlin.Unit;
@@ -36,13 +39,13 @@ public class RNAugmentPlayer extends FrameLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void onReceiveNativeEvent(RNAugmentPlayerEvent event) {
+    public void onReceiveNativeEvent(RNAugmentPlayerEvent event, WritableMap parametersMap) {
         ReactContext reactContext = (ReactContext) getContext();
         RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
         eventEmitter.receiveEvent(
                 getId(),
                 event.toString(),
-                null);
+                parametersMap);
     }
 
     void createFragment(ReactContext context) {
@@ -54,9 +57,19 @@ public class RNAugmentPlayer extends FrameLayout {
                 .commitNow();
         addView(fragment.getView(), 0);
         augmentPlayer = fragment.getAugmentPlayer();
+        augmentPlayer.setTrackingStatusListener((trackingStatus, reason) -> {
+            WritableMap paramsMap = Arguments.createMap();
+            paramsMap.putString("status",
+                    // LIMITED_INSUFFICIENT_LIGHT doesn't exist on ios
+                    trackingStatus == TrackingStatus.LIMITED_INSUFFICIENT_LIGHT ?
+                            TrackingStatus.LIMITED_INSUFFICIENT_FEATURES.toString() :
+                            trackingStatus.name());
+            paramsMap.putString("message", reason);
+            onReceiveNativeEvent(RNAugmentPlayerEvent.onTrackingStatusChanged, paramsMap);
+        });
         augmentPlayer.getViews().createLiveViewer(() -> {
-            onReceiveNativeEvent(RNAugmentPlayerEvent.onPlayerReady);
-            onReceiveNativeEvent(RNAugmentPlayerEvent.onLoadingDidFinish);
+            onReceiveNativeEvent(RNAugmentPlayerEvent.onPlayerReady, null);
+            onReceiveNativeEvent(RNAugmentPlayerEvent.onLoadingDidFinish, null);
             ViewGroup view = (ViewGroup) fragment.getView();
             for (int i = 0; i < view.getChildCount(); i++) {
                 View child = view.getChildAt(i);

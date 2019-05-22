@@ -27,8 +27,8 @@ public class RNAugmentPlayerSDK extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void init(ReadableMap product) {
-
+    public void init(ReadableMap sdkCredentialsMap) {
+        // Added on the Manifest
     }
 
     @ReactMethod

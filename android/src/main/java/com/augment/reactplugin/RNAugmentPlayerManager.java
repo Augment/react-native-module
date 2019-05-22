@@ -2,6 +2,7 @@ package com.augment.reactplugin;
 
 import androidx.annotation.NonNull;
 
+import com.ar.augment.arplayer.sdk.TrackingStatus;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactMethod;
@@ -101,7 +102,14 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
     public Map<String, Object> getConstants() {
         return new HashMap<String, Object>() {{
             put("ModelGesture", "");
-            put("TrackingStatus", "");
+            put("TrackingStatus", new HashMap<String, Object>() {{
+                put("error", TrackingStatus.ERROR.toString());
+                put("initializing", TrackingStatus.INITIALIZING.toString());
+                put("normal", TrackingStatus.NORMAL.toString());
+                put("limitedExcessiveMotion", TrackingStatus.LIMITED_EXCESSIVE_MOTION.toString());
+                put("limitedInsufficientFeatures", TrackingStatus.LIMITED_INSUFFICIENT_FEATURES.toString());
+                put("notAvailable", TrackingStatus.NOT_AVAILABLE.toString());
+            }});
         }};
     }
 
