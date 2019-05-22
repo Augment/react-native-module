@@ -29,11 +29,6 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
         return "RNAugmentPlayer";
     }
 
-    @Override
-    public boolean needsCustomLayoutForChildren() {
-        return true;
-    }
-
     @Nonnull
     @Override
     protected RNAugmentPlayer createViewInstance(@Nonnull ThemedReactContext reactContext) {
@@ -71,9 +66,8 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
      * This method needs to be called after the success of `AugmentReact.start`
      */
     @ReactMethod
-
-    public void addProduct(int reactTag, ReadableMap product, Promise promise) {
-        promise.reject("500", "Error: SDK is not available on Android.");
+    public void addProduct(int reactTag, ReadableMap productMap, Promise promise) {
+        rnAugmentPlayer.addProduct(productMap, promise);
     }
 
     /**

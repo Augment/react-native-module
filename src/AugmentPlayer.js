@@ -134,6 +134,6 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
   }
 
   async addProduct(product) {
-    return await RNAugmentPlayerManager.addProduct(product, this._playerHandle);
+    return await RNAugmentPlayerManager.addProduct(this._playerHandle, product);
   }
 }

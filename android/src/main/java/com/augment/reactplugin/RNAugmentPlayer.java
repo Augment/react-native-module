@@ -8,53 +8,40 @@ import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.ar.augment.arplayer.model.ComputedDimension;
-import com.ar.augment.arplayer.model.DisplayConfiguration;
-import com.ar.augment.arplayer.model.Model3D;
-import com.ar.augment.arplayer.model.Model3DFile;
-import com.ar.augment.arplayer.model.Thumbnail;
+import com.ar.augment.arplayer.model.Product;
+import com.ar.augment.arplayer.sdk.AugmentPlayer;
 import com.ar.augment.arplayer.sdk.AugmentPlayerFragment;
+import com.ar.augment.arplayer.sdk.AugmentSDK;
 import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import kotlin.Unit;
 
 public class RNAugmentPlayer extends FrameLayout {
-    public static int generateViewId = View.generateViewId();
     private static final String AUGMENT_FRAGMENT_TAG = "AUGMENT_FRAGMENT_TAG";
+    private AugmentPlayer augmentPlayer;
 
     public RNAugmentPlayer(Context context) {
         super(context);
-        setUpListener();
     }
 
     public RNAugmentPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setUpListener();
     }
 
     public RNAugmentPlayer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setUpListener();
     }
 
-    /// TEST FOR EVENTS
-    private void setUpListener() {
-        setOnClickListener(v -> onReceiveNativeEvent());
-        setId(generateViewId);
-    }
-
-    public void onReceiveNativeEvent() {
+    public void onReceiveNativeEvent(RNAugmentPlayerEvent event) {
         ReactContext reactContext = (ReactContext) getContext();
         RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
         eventEmitter.receiveEvent(
                 getId(),
-                RNAugmentPlayerEvent.onLoadingDidFinish.toString(),
-                null);
-        eventEmitter.receiveEvent(
-                getId(),
-                RNAugmentPlayerEvent.onPlayerReady.toString(),
+                event.toString(),
                 null);
     }
 
@@ -66,33 +53,10 @@ public class RNAugmentPlayer extends FrameLayout {
                 .add(fragment, AUGMENT_FRAGMENT_TAG)
                 .commitNow();
         addView(fragment.getView(), 0);
-        fragment.getAugmentPlayer().getViews().createLiveViewer(() -> {
-            fragment.getAugmentPlayer().getContent().add(new Model3D("",
-                            "",
-                            new ComputedDimension(0.0, 0.0, 0.0, 0.0, ""),
-                            "",
-                            "",
-                            new DisplayConfiguration(),
-                            false,
-                            false,
-                            new Thumbnail("", 0, 0),
-                            new Thumbnail("", 0, 0),
-                            new Model3DFile("", "", ""),
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            new Thumbnail("", 0, 0),
-                            "",
-                            "",
-                            "66b4630e-688f-49e0-a0b9-a3f23443f4f1",
-                            "",
-                            "")
-
-                    , (model3DInstance, error) -> Unit.INSTANCE);
+        augmentPlayer = fragment.getAugmentPlayer();
+        augmentPlayer.getViews().createLiveViewer(() -> {
+            onReceiveNativeEvent(RNAugmentPlayerEvent.onPlayerReady);
+            onReceiveNativeEvent(RNAugmentPlayerEvent.onLoadingDidFinish);
             ViewGroup view = (ViewGroup) fragment.getView();
             for (int i = 0; i < view.getChildCount(); i++) {
                 View child = view.getChildAt(i);
@@ -116,5 +80,21 @@ public class RNAugmentPlayer extends FrameLayout {
                 .detach(fragment)
                 .remove(fragment)
                 .commit();
+    }
+
+    public void addProduct(ReadableMap productMap, Promise promise) {
+        Product product = AugmentSDK.getInstance().getProductsDataController().getProduct(productMap.getString(RNAugmentPlayerProductKeys.IDENTIFIER));
+        if (augmentPlayer != null) {
+            ((ReactContext) getContext()).getCurrentActivity().runOnUiThread(() ->
+                    augmentPlayer.getContent().add(product.getModel3D(), (model3DInstance, error) -> {
+                        if (error != null) {
+                            promise.reject("500", error.getMessage());
+                        }
+                        if (model3DInstance != null) {
+                            promise.resolve(null);
+                        }
+                        return Unit.INSTANCE;
+                    }));
+        }
     }
 }
