@@ -87,6 +87,7 @@ public class RNAugmentPlayer extends FrameLayout {
         FragmentManager supportFragmentManager = activity.getSupportFragmentManager();
         view.removeAllViews();
         AugmentPlayerFragment fragment = (AugmentPlayerFragment) supportFragmentManager.findFragmentByTag(AUGMENT_FRAGMENT_TAG);
+        augmentPlayer.setTrackingStatusListener(null);
         fragment.getAugmentPlayer().getViews().destroyCurrentViewer();
         supportFragmentManager
                 .beginTransaction()
