@@ -76,13 +76,13 @@ public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
      */
     @ReactMethod
     public void recenterProducts(int reactTag, Promise promise) {
-        promise.reject("500", "Error: SDK is not available on Android.");
+        promise.reject("500", "Error: Not available");
     }
 
 
     @ReactMethod
     public void takeScreenshot(int reactTag, @NonNull final Promise promise) {
-        promise.reject("500", "Error: SDK is not available on Android.");
+        rnAugmentPlayer.takeScreenshot(promise);
     }
 
     public Map<String, Object> getExportedCustomBubblingEventTypeConstants() {

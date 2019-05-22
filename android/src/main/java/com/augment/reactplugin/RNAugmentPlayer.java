@@ -97,4 +97,15 @@ public class RNAugmentPlayer extends FrameLayout {
                     }));
         }
     }
+
+    public void takeScreenshot(Promise promise) {
+//        augmentPlayer.takeScreenshot((bytes, error) -> {
+//            if (error != null) {
+//                promise.reject("500", error.getMessage());
+//            }
+//            promise.resolve(image's path);
+//            return Unit.INSTANCE;
+//        });
+        promise.reject("500", "Not Available");
+    }
 }
