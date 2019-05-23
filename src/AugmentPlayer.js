@@ -52,6 +52,19 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
     super(props);
   }
 
+  componentDidMount() {
+    if (Platform.OS === 'android')
+      this._create();
+  }
+
+  _create = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this._playerRef),
+      UIManager.getViewManagerConfig('RNAugmentPlayer').Commands.create,
+      [] // No args
+    )
+  }
+
   render() {
     return (
       <RNAugmentPlayer
@@ -122,6 +135,6 @@ export default class AugmentPlayer extends React.Component<PropsType, StateType>
   }
 
   async addProduct(product) {
-    return await RNAugmentPlayerManager.addProduct(product, this._playerHandle);
+    return await RNAugmentPlayerManager.addProduct(this._playerHandle, product);
   }
 }

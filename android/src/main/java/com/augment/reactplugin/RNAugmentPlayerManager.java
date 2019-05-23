@@ -1,15 +1,16 @@
 package com.augment.reactplugin;
 
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 
+import com.ar.augment.arplayer.sdk.TrackingStatus;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +20,8 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
+public class RNAugmentPlayerManager extends ViewGroupManager<RNAugmentPlayer> {
+    private static final int COMMAND_CREATE = 12;
     private RNAugmentPlayer rnAugmentPlayer;
 
     @Nonnull
@@ -32,9 +34,30 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
     @Override
     protected RNAugmentPlayer createViewInstance(@Nonnull ThemedReactContext reactContext) {
         rnAugmentPlayer = new RNAugmentPlayer(reactContext);
-        rnAugmentPlayer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        rnAugmentPlayer.setText("Hello AR");
         return rnAugmentPlayer;
+    }
+
+    @Override
+    public void onDropViewInstance(@Nonnull RNAugmentPlayer view) {
+        super.onDropViewInstance(view);
+        rnAugmentPlayer.removeFragment(view);
+    }
+
+    @Nullable
+    @Override
+    public Map<String, Integer> getCommandsMap() {
+        return MapBuilder.of(
+                "create", COMMAND_CREATE
+        );
+    }
+
+    @Override
+    public void receiveCommand(@Nonnull RNAugmentPlayer root, int commandId, @Nullable ReadableArray args) {
+        switch (commandId) {
+            case COMMAND_CREATE:
+                rnAugmentPlayer.createFragment((ReactContext) root.getContext());
+                break;
+        }
     }
 
     /**
@@ -44,8 +67,8 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
      * This method needs to be called after the success of `AugmentReact.start`
      */
     @ReactMethod
-    public void addProduct(int reactTag, ReadableMap product, Promise promise) {
-        promise.reject("500", "Error: SDK is not available on Android.");
+    public void addProduct(int reactTag, ReadableMap productMap, Promise promise) {
+        rnAugmentPlayer.addProduct(productMap, promise);
     }
 
     /**
@@ -54,13 +77,13 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
      */
     @ReactMethod
     public void recenterProducts(int reactTag, Promise promise) {
-        promise.reject("500", "Error: SDK is not available on Android.");
+        promise.reject("500", "Error: Not available");
     }
 
 
     @ReactMethod
     public void takeScreenshot(int reactTag, @NonNull final Promise promise) {
-        promise.reject("500", "Error: SDK is not available on Android.");
+        rnAugmentPlayer.takeScreenshot(promise);
     }
 
     public Map<String, Object> getExportedCustomBubblingEventTypeConstants() {
@@ -79,7 +102,14 @@ public class RNAugmentPlayerManager extends SimpleViewManager<RNAugmentPlayer> {
     public Map<String, Object> getConstants() {
         return new HashMap<String, Object>() {{
             put("ModelGesture", "");
-            put("TrackingStatus", "");
+            put("TrackingStatus", new HashMap<String, Object>() {{
+                put("error", TrackingStatus.ERROR.toString());
+                put("initializing", TrackingStatus.INITIALIZING.toString());
+                put("normal", TrackingStatus.NORMAL.toString());
+                put("limitedExcessiveMotion", TrackingStatus.LIMITED_EXCESSIVE_MOTION.toString());
+                put("limitedInsufficientFeatures", TrackingStatus.LIMITED_INSUFFICIENT_FEATURES.toString());
+                put("notAvailable", TrackingStatus.NOT_AVAILABLE.toString());
+            }});
         }};
     }
 
