@@ -1,35 +1,36 @@
 PODS:
   - Alamofire (4.8.2)
-  - AugmentPlayerSDK (4.1.1):
-    - Alamofire (~> 4.7)
+  - AugmentPlayerSDK (5.0.0):
+    - Alamofire (~> 4.8.0)
     - JWTDecode
-    - Moya (~> 11.0)
+    - Moya (~> 12.0.1)
   - JWTDecode (2.3.0)
-  - Moya (11.0.2):
-    - Moya/Core (= 11.0.2)
-  - Moya/Core (11.0.2):
+  - Moya (12.0.1):
+    - Moya/Core (= 12.0.1)
+  - Moya/Core (12.0.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Result (3.2.4)
+    - Result (~> 4.0)
+  - Result (4.1.0)
 
 DEPENDENCIES:
-  - AugmentPlayerSDK (= 4.1.1)
+  - AugmentPlayerSDK (~> 5.0.0)
 
 SPEC REPOS:
+  https://github.com/Augment/Specs.git:
+    - AugmentPlayerSDK
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - AugmentPlayerSDK
     - JWTDecode
     - Moya
     - Result
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  AugmentPlayerSDK: fe6e542dcb2ca4b948a54d60a7cfb5ae9c70bc7d
+  AugmentPlayerSDK: 48d0958eb8bfab6718f5c84380685d696034846d
   JWTDecode: fb77675c8049c1a7e9433c7cf448c3ce33ee4ac7
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
 
-PODFILE CHECKSUM: 13090aa449b1c2fd38bd731bc529492fb931d5ba
+PODFILE CHECKSUM: 9a7fbebf11b56383aa55887230c053d36d934bca
 
 COCOAPODS: 1.6.2

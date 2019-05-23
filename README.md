@@ -8,7 +8,7 @@ To install and use this module, please refer to the official [Augment developers
 ## iOS
 Version compatibility:
 
-| Xcode | SDK       |
-|-------|-----------|
-| 10.1  | <= 4.0.17 |
-| 10.2  |   soon    |
+| Xcode | SDK      |
+|-------|----------|
+| 10.1  | <= 4.0.x |
+| 10.2  | >= 5.x   |
