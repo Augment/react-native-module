@@ -73,8 +73,8 @@ RCT_EXPORT_VIEW_PROPERTY(onTrackingStatusChanged, RCTBubblingEventBlock)
 
 
 RCT_REMAP_METHOD(addProduct,
-                 product:(NSDictionary *)product
                  reactTag:(nonnull NSNumber *)reactTag
+                 product:(NSDictionary *)product
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
