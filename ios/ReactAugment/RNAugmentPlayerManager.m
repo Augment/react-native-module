@@ -18,7 +18,7 @@
 
 @implementation RNAugmentPlayerManager
 
-RCT_EXPORT_MODULE(RNAugmentPlayerManager)
+RCT_EXPORT_MODULE(RNAugmentPlayer)
 
 RCT_EXPORT_VIEW_PROPERTY(onPlayerReady, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onInitializationFailed, RCTBubblingEventBlock)
@@ -73,8 +73,8 @@ RCT_EXPORT_VIEW_PROPERTY(onTrackingStatusChanged, RCTBubblingEventBlock)
 
 
 RCT_REMAP_METHOD(addProduct,
-                 product:(NSDictionary *)product
                  reactTag:(nonnull NSNumber *)reactTag
+                 product:(NSDictionary *)product
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {

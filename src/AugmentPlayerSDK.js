@@ -18,21 +18,7 @@ import PropTypes from 'prop-types'
 /**
 * This is the Native class interface for javascript only parts
 */
-const RNAugmentPlayerSDK = (Platform.OS === 'ios') ? NativeModules.RNAugmentPlayerSDK : {
-  init: () => {
-      return;
-  },
-
-  checkIfModelDoesExistForUserProduct: (productToSearch) => {
-      return new Promise((resolve, reject) => {
-          reject("AugmentPlayerSDK is currently not available on Android");
-      });
-  },
-
-  isARKitAvailable: (callback) => {
-    return callback(false)
-  }
-}
+const RNAugmentPlayerSDK = NativeModules.RNAugmentPlayerSDK
 
 // These are defined by the Native module and are main event sent by Augment SDK
 // AugmentReact.AUGMENT_EVENT_LOADING_PROGRESS

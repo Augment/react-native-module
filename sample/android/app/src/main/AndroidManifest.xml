@@ -21,6 +21,12 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <meta-data
+           android:name="@string/augment_sdk_app_id"
+           android:value="357fee36746668573ceb2f5957c4869ee1a62a112639bac9b0fae43c7c431692" />
+       <meta-data
+           android:name="@string/augment_sdk_app_client"
+           android:value="80ae1420e164e0440d5329067bcdd953e9fa6c63b75c001c06d169a4f11268c5" />
     </application>
 
 </manifest>

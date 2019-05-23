@@ -1,6 +1,6 @@
 {
     "name": "react-native-augment",
-    "version": "2.0.0",
+    "version": "3.0.0-beta.1",
     "description": "Augment Plugin for the Augment Mobile SDK",
     "homepage": "https://developers.augment.com",
     "bugs": "https://github.com/Augment/react-native-module/issues",
@@ -32,7 +32,7 @@
     ],
     "nativePackage": true,
     "devDependencies": {
-        "react": "16.3.1",
-        "react-native": "^0.56.0"
+        "react": "16.8.3",
+        "react-native": "0.59.5"
     }
 }
