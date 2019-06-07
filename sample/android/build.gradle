@@ -34,6 +34,6 @@ allprojects {
         maven {
             url 'https://maven.google.com'
         }
-       maven { url  "https://dl.bintray.com/augment/augment" }
+        maven { url  "https://dl.bintray.com/augment/augment" }
     }
 }
