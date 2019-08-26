@@ -30,6 +30,16 @@
         "android",
         "ios"
     ],
+    "scripts": {
+      "start": "react-native start",
+      "android": "react-native run-android",
+      "ios": "react-native run-ios",
+      "test": "node node_modules/jest/bin/jest.js"
+    },
+    "jest": {
+      "preset": "jest-expo",
+      "testResultsProcessor": "jest-junit"
+    },
     "nativePackage": true,
     "devDependencies": {
         "react": "16.8.3",
