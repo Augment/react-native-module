@@ -28,9 +28,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
       - run:
-        name: jest tests
-        command: |
-          mkdir -p test-results/jest
-          yarn run test
-        environment:
-          JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
+          name: jest tests
+          command: |
+            mkdir -p test-results/jest
+            yarn run test
+          environment:
+            JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
