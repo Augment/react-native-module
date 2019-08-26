@@ -44,6 +44,7 @@
     "devDependencies": {
         "react": "16.8.3",
         "react-native": "0.59.5",
+        "babel-preset-react-native-stage-0": "^1.0.1",
         "jest-expo": "23.0.0",
         "jest-junit": "3.3.0",
         "react-test-renderer": "16.0.0"
