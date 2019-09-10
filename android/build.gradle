@@ -2,6 +2,7 @@ buildscript {
     repositories {
         jcenter()
         google()
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.0'
@@ -16,6 +17,7 @@ allprojects {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
         }
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -26,6 +28,7 @@ repositories {
     mavenLocal()
     google()
     maven { url  "https://dl.bintray.com/augment/augment" }
+    maven { url 'https://jitpack.io' }
 }
 
 android {
@@ -48,5 +51,5 @@ dependencies {
     implementation "com.facebook.react:react-native:+"
     implementation "com.google.zxing:core:3.2.1"
     implementation "com.drewnoakes:metadata-extractor:2.9.1"
-    implementation "com.ar.augment:augment-player-sdk:2.0.0-alpha4"
+    implementation "com.ar.augment:augment-player-sdk:2.0.0-beta1"
 }
