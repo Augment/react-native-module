@@ -5,18 +5,22 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath("com.android.tools.build:gradle:3.4.2")
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
-        google()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
+            url("$rootDir/../node_modules/react-native/android")
         }
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
+        google()
+        jcenter()
         maven { url 'https://jitpack.io' }
     }
 }

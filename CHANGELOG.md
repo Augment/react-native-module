@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0-beta.4] - 2019-10-03
+### Changed
+- React Native and dependencies updated: "react": "16.9.0"; "react-native": "0.61.2"
+
 ## [3.0.0-beta.3] - 2019-06-07
 ### Changed
 - Updated AndroidSDK `2.0.0-beta1`
