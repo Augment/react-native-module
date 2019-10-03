@@ -1,3 +1,13 @@
 node_modules/
 ios/main.*
 *.tgz
+
+# Android/IntelliJ
+#
+buck-out/
+\.buckd/
+*.keystore
+!debug.keystore
+
+# CocoaPods
+/ios/Pods/
